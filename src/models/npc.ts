@@ -31,3 +31,14 @@ export enum ALIGNMENT {
     NE,
     CE
 }
+
+export enum RACE {
+    HUMAN="Human",
+    ELF="Elf",
+    HALF_ELF="Half Elf",
+    DWARF="Dwarf",
+    GOBLIN="Goblin",
+    HALF_ORC="Half Orc",
+    HALFLING="Halfling",
+    GNOME="Gnome"
+}
