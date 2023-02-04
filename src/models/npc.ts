@@ -1,0 +1,33 @@
+export interface NPC {
+    first_name: string,
+    last_name: string,
+    portrait: Buffer,
+    age: number,
+    gender: boolean,
+    height_inches: number,
+    weight_lbs: number,
+    str: number,
+    dex: number,
+    con: number,
+    int: number,
+    wis: number,
+    cha: number,
+    alignment: ALIGNMENT,
+    class: string,
+    physical_description: string,
+    personality_description: string,
+    history: string,
+    plot_hook?: string,
+}
+
+export enum ALIGNMENT {
+    LG,
+    NG,
+    CG,
+    LN,
+    TN,
+    CN,
+    LE,
+    NE,
+    CE
+}
