@@ -6,7 +6,9 @@ import {
 import { HTMLElementRefOf } from "@plasmicapp/react-web";
 import {useState} from "react";
 
-export interface GenerateSelectorProps extends DefaultGenerateSelectorProps {}
+export interface GenerateSelectorProps extends DefaultGenerateSelectorProps {
+  generateButtonClick: Function;
+}
 
 function GenerateSelector_(props: GenerateSelectorProps, ref: HTMLElementRefOf<"div">) {
   const rest = props as DefaultGenerateSelectorProps;
@@ -18,6 +20,11 @@ function GenerateSelector_(props: GenerateSelectorProps, ref: HTMLElementRefOf<"
                                     props: {
                                       style: {cursor: "pointer"},
                                       onClick: () => setTavern(!tavern),
+                                    }
+                                  }}
+                                  generate={{
+                                    props: {
+                                      onClick: () => props.generateButtonClick()
                                     }
                                   }}
                                   {...rest} />;

@@ -6,39 +6,48 @@ import {
   DefaultInfoPanelProps
 } from "./plasmic/d_d_npc_generator/PlasmicInfoPanel";
 import { HTMLElementRefOf } from "@plasmicapp/react-web";
+import { NPC } from "../models/npc";
 
-// Your component props start with props for variants and slots you defined
-// in Plasmic, but you can add more here, like event handlers that you can
-// attach to named nodes in your component.
-//
-// If you don't want to expose certain variants or slots as a prop, you can use
-// Omit to hide them:
-//
-// interface InfoPanelProps extends Omit<DefaultInfoPanelProps, "hideProps1"|"hideProp2"> {
-//   // etc.
-// }
-//
-// You can also stop extending from DefaultInfoPanelProps altogether and have
-// total control over the props for your component.
-export interface InfoPanelProps extends DefaultInfoPanelProps {}
+export interface InfoPanelProps extends DefaultInfoPanelProps {
+  npc?: NPC;
+}
+
+function heightConversion(heightInInches: number): string {
+  const inches = heightInInches % 12;
+  const feet = (heightInInches - inches) / 12;
+  return `${feet} ft ${inches} in`;
+}
 
 function InfoPanel_(props: InfoPanelProps, ref: HTMLElementRefOf<"div">) {
-  // Use PlasmicInfoPanel to render this component as it was
-  // designed in Plasmic, by activating the appropriate variants,
-  // attaching the appropriate event handlers, etc.  You
-  // can also install whatever React hooks you need here to manage state or
-  // fetch data.
-  //
-  // Props you can pass into PlasmicInfoPanel are:
-  // 1. Variants you want to activate,
-  // 2. Contents for slots you want to fill,
-  // 3. Overrides for any named node in the component to attach behavior and data,
-  // 4. Props to set on the root node.
-  //
-  // By default, we are just piping all InfoPanelProps here, but feel free
-  // to do whatever works for you.
+  const rest = props as DefaultInfoPanelProps;
+  const npc = props.npc;
 
-  return <PlasmicInfoPanel root={{ ref }} {...props} />;
+  if (!npc) {
+    return <div></div>
+  }
+
+  return <PlasmicInfoPanel
+    root={{ ref }}
+    name2={{ props: { children: `${npc.first_name} ${npc.last_name}`} }}
+    name={{ props: { children: `${npc.last_name}, ${npc.first_name}` } }}
+    age={{ props: { children: npc.age } }}
+    gender={{ props: { children: npc.gender ? 'Male' : 'Female' } }}
+    height={{ props: { children: heightConversion(npc.height_inches) } }}
+    height2={{ props: { children: `${npc.weight_lbs} lbs` } }}
+    descriptionBox={{ props: { children: <p>{npc.physical_description}</p> } }}
+    str={{ props: { children: npc.str } }}
+    dex={{ props: { children: npc.dex } }}
+    con={{ props: { children: npc.con } }}
+    int={{ props: { children: npc.int } }}
+    wis={{ props: { children: npc.wis } }}
+    cha={{ props: { children: npc.cha } }}
+    alignment={{ props: { children: npc.alignment } }}
+    job={{ props: { children: npc.class } }}
+    personalityBox={{ props: { children: <p>{npc.personality_description}</p> } }}
+    historyBox={{ props: { children: <p>{npc.history}</p> } }}
+    plotBox={{ props: { children: <p>{npc.plot_hook}</p> } }}
+    {...rest}
+  />;
 }
 
 const InfoPanel = React.forwardRef(InfoPanel_);
