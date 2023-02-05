@@ -18,6 +18,7 @@ export interface NPC {
     personality_description: string,
     history: string,
     plot_hook?: string,
+    race: RACE,
 }
 
 export enum ALIGNMENT {
