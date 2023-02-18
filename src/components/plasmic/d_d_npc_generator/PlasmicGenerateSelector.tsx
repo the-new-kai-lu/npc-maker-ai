@@ -31,7 +31,7 @@ import {
   deriveRenderOpts,
   ensureGlobalVariants
 } from "@plasmicapp/react-web";
-import Select from "../../Select"; // plasmic-import: _p3h-q-1811/component
+import Select from "antd/lib/select"; // plasmic-import: 2YpGIhkzkpc/codeComponent
 import Select__Option from "../../Select__Option"; // plasmic-import: AQwZIy0fAMn/component
 import Checkbox from "../../Checkbox"; // plasmic-import: nPjHAnzGVYU/component
 import { Slider } from "@plasmicpkgs/antd/skinny/registerSlider"; // plasmic-import: iBC45mjTXv/codeComponent
@@ -68,14 +68,18 @@ export type PlasmicGenerateSelector__OverridesType = {
   genderSelect?: p.Flex<typeof Select>;
   raceSelect?: p.Flex<typeof Select>;
   alignmentSelect?: p.Flex<typeof Select>;
+  abilityScoreTooltip?: p.Flex<"svg">;
   abilityScoreSelect?: p.Flex<typeof Select>;
   jobSelect?: p.Flex<typeof Select>;
   plotHookCheck?: p.Flex<typeof Checkbox>;
   genderSlider?: p.Flex<typeof Slider>;
   primaryRaceSelect?: p.Flex<typeof Select>;
-  diversitySelect?: p.Flex<typeof Select>;
+  diversityTooltip?: p.Flex<"svg">;
+  diversitySlider?: p.Flex<typeof Slider>;
+  economicsTooltip?: p.Flex<"svg">;
   economicsSelect?: p.Flex<typeof Select>;
-  economicsSelect2?: p.Flex<typeof Select>;
+  alignmentTooltip?: p.Flex<"svg">;
+  alignmentDistributionSelect?: p.Flex<typeof Select>;
   plotHookPercentage?: p.Flex<typeof TextInput>;
   totalCount?: p.Flex<typeof TextInput>;
   generate?: p.Flex<typeof Button>;
@@ -111,6 +115,8 @@ function PlasmicGenerateSelector__RenderFunc(props: {
     ...args,
     ...variants
   };
+  const refsRef = React.useRef({});
+  const $refs = refsRef.current;
 
   const currentUser = p.useCurrentUser?.() || {};
 
@@ -187,7 +193,6 @@ function PlasmicGenerateSelector__RenderFunc(props: {
             data-plasmic-name={"genderSelect"}
             data-plasmic-override={overrides.genderSelect}
             className={classNames("__wab_instance", sty.genderSelect)}
-            color={"clear" as const}
             placeholder={
               <div
                 className={classNames(
@@ -199,18 +204,23 @@ function PlasmicGenerateSelector__RenderFunc(props: {
                 {"Select…"}
               </div>
             }
-            selectedContent={
-              <div
-                className={classNames(
-                  projectcss.all,
-                  projectcss.__wab_text,
-                  sty.text__zDlfW
-                )}
-              >
-                {"Selected"}
-              </div>
-            }
-          />
+            size={"large" as const}
+            virtual={true}
+          >
+            <Select__Option
+              className={classNames("__wab_instance", sty.option__fFbb)}
+              value={"option" as const}
+            >
+              {"Option 1"}
+            </Select__Option>
+
+            <Select__Option
+              className={classNames("__wab_instance", sty.option__tyg2X)}
+              value={"option" as const}
+            >
+              {"Option 2"}
+            </Select__Option>
+          </Select>
         </p.Stack>
       ) : null}
       {(hasVariant($state, "tavern", "tavern") ? true : true) ? (
@@ -239,7 +249,6 @@ function PlasmicGenerateSelector__RenderFunc(props: {
             data-plasmic-name={"raceSelect"}
             data-plasmic-override={overrides.raceSelect}
             className={classNames("__wab_instance", sty.raceSelect)}
-            color={"clear" as const}
             placeholder={
               <div
                 className={classNames(
@@ -251,18 +260,21 @@ function PlasmicGenerateSelector__RenderFunc(props: {
                 {"Select…"}
               </div>
             }
-            selectedContent={
-              <div
-                className={classNames(
-                  projectcss.all,
-                  projectcss.__wab_text,
-                  sty.text__rrDrL
-                )}
-              >
-                {"Selected"}
-              </div>
-            }
-          />
+          >
+            <Select__Option
+              className={classNames("__wab_instance", sty.option__az7YF)}
+              value={"option" as const}
+            >
+              {"Option 1"}
+            </Select__Option>
+
+            <Select__Option
+              className={classNames("__wab_instance", sty.option__iGchz)}
+              value={"option" as const}
+            >
+              {"Option 2"}
+            </Select__Option>
+          </Select>
         </p.Stack>
       ) : null}
       {(hasVariant($state, "tavern", "tavern") ? true : true) ? (
@@ -291,7 +303,6 @@ function PlasmicGenerateSelector__RenderFunc(props: {
             data-plasmic-name={"alignmentSelect"}
             data-plasmic-override={overrides.alignmentSelect}
             className={classNames("__wab_instance", sty.alignmentSelect)}
-            color={"clear" as const}
             placeholder={
               <div
                 className={classNames(
@@ -303,18 +314,21 @@ function PlasmicGenerateSelector__RenderFunc(props: {
                 {"Select…"}
               </div>
             }
-            selectedContent={
-              <div
-                className={classNames(
-                  projectcss.all,
-                  projectcss.__wab_text,
-                  sty.text__owfoi
-                )}
-              >
-                {"Selected"}
-              </div>
-            }
-          />
+          >
+            <Select__Option
+              className={classNames("__wab_instance", sty.option___7ZooW)}
+              value={"option" as const}
+            >
+              {"Option 1"}
+            </Select__Option>
+
+            <Select__Option
+              className={classNames("__wab_instance", sty.option__oWIf)}
+              value={"option" as const}
+            >
+              {"Option 2"}
+            </Select__Option>
+          </Select>
         </p.Stack>
       ) : null}
       {(hasVariant($state, "tavern", "tavern") ? true : true) ? (
@@ -341,7 +355,9 @@ function PlasmicGenerateSelector__RenderFunc(props: {
             </div>
 
             <InfoIcon
-              className={classNames(projectcss.all, sty.svg__wXq3R)}
+              data-plasmic-name={"abilityScoreTooltip"}
+              data-plasmic-override={overrides.abilityScoreTooltip}
+              className={classNames(projectcss.all, sty.abilityScoreTooltip)}
               role={"img"}
             />
           </div>
@@ -350,7 +366,6 @@ function PlasmicGenerateSelector__RenderFunc(props: {
             data-plasmic-name={"abilityScoreSelect"}
             data-plasmic-override={overrides.abilityScoreSelect}
             className={classNames("__wab_instance", sty.abilityScoreSelect)}
-            color={"clear" as const}
             placeholder={
               <div
                 className={classNames(
@@ -362,18 +377,21 @@ function PlasmicGenerateSelector__RenderFunc(props: {
                 {"Select…"}
               </div>
             }
-            selectedContent={
-              <div
-                className={classNames(
-                  projectcss.all,
-                  projectcss.__wab_text,
-                  sty.text__phpLi
-                )}
-              >
-                {"Selected"}
-              </div>
-            }
-          />
+          >
+            <Select__Option
+              className={classNames("__wab_instance", sty.option__vp4OB)}
+              value={"option" as const}
+            >
+              {"Option 1"}
+            </Select__Option>
+
+            <Select__Option
+              className={classNames("__wab_instance", sty.option__frVkb)}
+              value={"option" as const}
+            >
+              {"Option 2"}
+            </Select__Option>
+          </Select>
         </p.Stack>
       ) : null}
       {(hasVariant($state, "tavern", "tavern") ? true : true) ? (
@@ -402,7 +420,6 @@ function PlasmicGenerateSelector__RenderFunc(props: {
             data-plasmic-name={"jobSelect"}
             data-plasmic-override={overrides.jobSelect}
             className={classNames("__wab_instance", sty.jobSelect)}
-            color={"clear" as const}
             placeholder={
               <div
                 className={classNames(
@@ -414,18 +431,21 @@ function PlasmicGenerateSelector__RenderFunc(props: {
                 {"Select…"}
               </div>
             }
-            selectedContent={
-              <div
-                className={classNames(
-                  projectcss.all,
-                  projectcss.__wab_text,
-                  sty.text__p2Ny9
-                )}
-              >
-                {"Selected"}
-              </div>
-            }
-          />
+          >
+            <Select__Option
+              className={classNames("__wab_instance", sty.option___0B849)}
+              value={"option" as const}
+            >
+              {"Option 1"}
+            </Select__Option>
+
+            <Select__Option
+              className={classNames("__wab_instance", sty.option__xdBSr)}
+              value={"option" as const}
+            >
+              {"Option 2"}
+            </Select__Option>
+          </Select>
         </p.Stack>
       ) : null}
       {(hasVariant($state, "tavern", "tavern") ? true : true) ? (
@@ -573,7 +593,6 @@ function PlasmicGenerateSelector__RenderFunc(props: {
                 "tavern"
               )
             })}
-            color={"clear" as const}
             placeholder={
               <div
                 className={classNames(
@@ -585,18 +604,21 @@ function PlasmicGenerateSelector__RenderFunc(props: {
                 {"Select…"}
               </div>
             }
-            selectedContent={
-              <div
-                className={classNames(
-                  projectcss.all,
-                  projectcss.__wab_text,
-                  sty.text__szSqE
-                )}
-              >
-                {"Selected"}
-              </div>
-            }
-          />
+          >
+            <Select__Option
+              className={classNames("__wab_instance", sty.option__b4R9)}
+              value={"option" as const}
+            >
+              {"Option 1"}
+            </Select__Option>
+
+            <Select__Option
+              className={classNames("__wab_instance", sty.option__st7Hr)}
+              value={"option" as const}
+            >
+              {"Option 2"}
+            </Select__Option>
+          </Select>
         </p.Stack>
       ) : null}
       {(hasVariant($state, "tavern", "tavern") ? true : false) ? (
@@ -623,39 +645,70 @@ function PlasmicGenerateSelector__RenderFunc(props: {
             </div>
 
             <InfoIcon
-              className={classNames(projectcss.all, sty.svg__oMqFh)}
+              data-plasmic-name={"diversityTooltip"}
+              data-plasmic-override={overrides.diversityTooltip}
+              className={classNames(projectcss.all, sty.diversityTooltip)}
               role={"img"}
             />
           </div>
 
-          <Select
-            data-plasmic-name={"diversitySelect"}
-            data-plasmic-override={overrides.diversitySelect}
-            className={classNames("__wab_instance", sty.diversitySelect)}
-            color={"clear" as const}
-            placeholder={
+          <div
+            className={classNames(projectcss.all, sty.freeBox__pGiud, {
+              [sty.freeBoxtavern__pGiud6EOuz]: hasVariant(
+                $state,
+                "tavern",
+                "tavern"
+              )
+            })}
+          >
+            <div
+              className={classNames(
+                projectcss.all,
+                projectcss.__wab_text,
+                sty.text___7V0Id,
+                {
+                  [sty.texttavern___7V0Id6EOuz]: hasVariant(
+                    $state,
+                    "tavern",
+                    "tavern"
+                  )
+                }
+              )}
+            >
+              {"Non-Primary"}
+            </div>
+
+            <Slider
+              data-plasmic-name={"diversitySlider"}
+              data-plasmic-override={overrides.diversitySlider}
+              className={classNames("__wab_instance", sty.diversitySlider, {
+                [sty.diversitySlidertavern]: hasVariant(
+                  $state,
+                  "tavern",
+                  "tavern"
+                )
+              })}
+            />
+
+            {(hasVariant($state, "tavern", "tavern") ? true : true) ? (
               <div
                 className={classNames(
                   projectcss.all,
                   projectcss.__wab_text,
-                  sty.text__ywtro
+                  sty.text__glwVw,
+                  {
+                    [sty.texttavern__glwVw6EOuz]: hasVariant(
+                      $state,
+                      "tavern",
+                      "tavern"
+                    )
+                  }
                 )}
               >
-                {"Select…"}
+                {"Female"}
               </div>
-            }
-            selectedContent={
-              <div
-                className={classNames(
-                  projectcss.all,
-                  projectcss.__wab_text,
-                  sty.text__eGlAt
-                )}
-              >
-                {"Selected"}
-              </div>
-            }
-          />
+            ) : null}
+          </div>
         </p.Stack>
       ) : null}
       {(hasVariant($state, "tavern", "tavern") ? true : false) ? (
@@ -682,7 +735,9 @@ function PlasmicGenerateSelector__RenderFunc(props: {
             </div>
 
             <InfoIcon
-              className={classNames(projectcss.all, sty.svg__xiAx9)}
+              data-plasmic-name={"economicsTooltip"}
+              data-plasmic-override={overrides.economicsTooltip}
+              className={classNames(projectcss.all, sty.economicsTooltip)}
               role={"img"}
             />
           </div>
@@ -691,7 +746,6 @@ function PlasmicGenerateSelector__RenderFunc(props: {
             data-plasmic-name={"economicsSelect"}
             data-plasmic-override={overrides.economicsSelect}
             className={classNames("__wab_instance", sty.economicsSelect)}
-            color={"clear" as const}
             placeholder={
               <div
                 className={classNames(
@@ -703,18 +757,21 @@ function PlasmicGenerateSelector__RenderFunc(props: {
                 {"Select…"}
               </div>
             }
-            selectedContent={
-              <div
-                className={classNames(
-                  projectcss.all,
-                  projectcss.__wab_text,
-                  sty.text__dyIvu
-                )}
-              >
-                {"Selected"}
-              </div>
-            }
-          />
+          >
+            <Select__Option
+              className={classNames("__wab_instance", sty.option___9XFZi)}
+              value={"option" as const}
+            >
+              {"Option 1"}
+            </Select__Option>
+
+            <Select__Option
+              className={classNames("__wab_instance", sty.option__aM6H)}
+              value={"option" as const}
+            >
+              {"Option 2"}
+            </Select__Option>
+          </Select>
         </p.Stack>
       ) : null}
       {(hasVariant($state, "tavern", "tavern") ? true : false) ? (
@@ -741,16 +798,20 @@ function PlasmicGenerateSelector__RenderFunc(props: {
             </div>
 
             <InfoIcon
-              className={classNames(projectcss.all, sty.svg__l1Bt)}
+              data-plasmic-name={"alignmentTooltip"}
+              data-plasmic-override={overrides.alignmentTooltip}
+              className={classNames(projectcss.all, sty.alignmentTooltip)}
               role={"img"}
             />
           </div>
 
           <Select
-            data-plasmic-name={"economicsSelect2"}
-            data-plasmic-override={overrides.economicsSelect2}
-            className={classNames("__wab_instance", sty.economicsSelect2)}
-            color={"clear" as const}
+            data-plasmic-name={"alignmentDistributionSelect"}
+            data-plasmic-override={overrides.alignmentDistributionSelect}
+            className={classNames(
+              "__wab_instance",
+              sty.alignmentDistributionSelect
+            )}
             placeholder={
               <div
                 className={classNames(
@@ -762,18 +823,21 @@ function PlasmicGenerateSelector__RenderFunc(props: {
                 {"Select…"}
               </div>
             }
-            selectedContent={
-              <div
-                className={classNames(
-                  projectcss.all,
-                  projectcss.__wab_text,
-                  sty.text__n2Eb0
-                )}
-              >
-                {"Selected"}
-              </div>
-            }
-          />
+          >
+            <Select__Option
+              className={classNames("__wab_instance", sty.option__nSbNa)}
+              value={"option" as const}
+            >
+              {"Option 1"}
+            </Select__Option>
+
+            <Select__Option
+              className={classNames("__wab_instance", sty.option___37Tow)}
+              value={"option" as const}
+            >
+              {"Option 2"}
+            </Select__Option>
+          </Select>
         </p.Stack>
       ) : null}
       {(hasVariant($state, "tavern", "tavern") ? true : false) ? (
@@ -900,14 +964,18 @@ const PlasmicDescendants = {
     "genderSelect",
     "raceSelect",
     "alignmentSelect",
+    "abilityScoreTooltip",
     "abilityScoreSelect",
     "jobSelect",
     "plotHookCheck",
     "genderSlider",
     "primaryRaceSelect",
-    "diversitySelect",
+    "diversityTooltip",
+    "diversitySlider",
+    "economicsTooltip",
     "economicsSelect",
-    "economicsSelect2",
+    "alignmentTooltip",
+    "alignmentDistributionSelect",
     "plotHookPercentage",
     "totalCount",
     "generate",
@@ -916,14 +984,18 @@ const PlasmicDescendants = {
   genderSelect: ["genderSelect"],
   raceSelect: ["raceSelect"],
   alignmentSelect: ["alignmentSelect"],
+  abilityScoreTooltip: ["abilityScoreTooltip"],
   abilityScoreSelect: ["abilityScoreSelect"],
   jobSelect: ["jobSelect"],
   plotHookCheck: ["plotHookCheck"],
   genderSlider: ["genderSlider"],
   primaryRaceSelect: ["primaryRaceSelect"],
-  diversitySelect: ["diversitySelect"],
+  diversityTooltip: ["diversityTooltip"],
+  diversitySlider: ["diversitySlider"],
+  economicsTooltip: ["economicsTooltip"],
   economicsSelect: ["economicsSelect"],
-  economicsSelect2: ["economicsSelect2"],
+  alignmentTooltip: ["alignmentTooltip"],
+  alignmentDistributionSelect: ["alignmentDistributionSelect"],
   plotHookPercentage: ["plotHookPercentage"],
   totalCount: ["totalCount"],
   generate: ["generate"],
@@ -937,14 +1009,18 @@ type NodeDefaultElementType = {
   genderSelect: typeof Select;
   raceSelect: typeof Select;
   alignmentSelect: typeof Select;
+  abilityScoreTooltip: "svg";
   abilityScoreSelect: typeof Select;
   jobSelect: typeof Select;
   plotHookCheck: typeof Checkbox;
   genderSlider: typeof Slider;
   primaryRaceSelect: typeof Select;
-  diversitySelect: typeof Select;
+  diversityTooltip: "svg";
+  diversitySlider: typeof Slider;
+  economicsTooltip: "svg";
   economicsSelect: typeof Select;
-  economicsSelect2: typeof Select;
+  alignmentTooltip: "svg";
+  alignmentDistributionSelect: typeof Select;
   plotHookPercentage: typeof TextInput;
   totalCount: typeof TextInput;
   generate: typeof Button;
@@ -1015,14 +1091,20 @@ export const PlasmicGenerateSelector = Object.assign(
     genderSelect: makeNodeComponent("genderSelect"),
     raceSelect: makeNodeComponent("raceSelect"),
     alignmentSelect: makeNodeComponent("alignmentSelect"),
+    abilityScoreTooltip: makeNodeComponent("abilityScoreTooltip"),
     abilityScoreSelect: makeNodeComponent("abilityScoreSelect"),
     jobSelect: makeNodeComponent("jobSelect"),
     plotHookCheck: makeNodeComponent("plotHookCheck"),
     genderSlider: makeNodeComponent("genderSlider"),
     primaryRaceSelect: makeNodeComponent("primaryRaceSelect"),
-    diversitySelect: makeNodeComponent("diversitySelect"),
+    diversityTooltip: makeNodeComponent("diversityTooltip"),
+    diversitySlider: makeNodeComponent("diversitySlider"),
+    economicsTooltip: makeNodeComponent("economicsTooltip"),
     economicsSelect: makeNodeComponent("economicsSelect"),
-    economicsSelect2: makeNodeComponent("economicsSelect2"),
+    alignmentTooltip: makeNodeComponent("alignmentTooltip"),
+    alignmentDistributionSelect: makeNodeComponent(
+      "alignmentDistributionSelect"
+    ),
     plotHookPercentage: makeNodeComponent("plotHookPercentage"),
     totalCount: makeNodeComponent("totalCount"),
     generate: makeNodeComponent("generate"),

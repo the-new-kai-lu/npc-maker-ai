@@ -41,5 +41,6 @@ export enum RACE {
     GOBLIN="Goblin",
     HALF_ORC="Half Orc",
     HALFLING="Halfling",
-    GNOME="Gnome"
+    GNOME="Gnome",
+    DRAGONBORN="Dragonborn"
 }

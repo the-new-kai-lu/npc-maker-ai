@@ -35,6 +35,7 @@
 }
 .triggercolor_clear {
   background: none;
+  border-color: #dbdbd7;
 }
 .triggerisOpen {
   background: #00000099;

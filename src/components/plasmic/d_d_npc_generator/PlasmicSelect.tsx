@@ -159,6 +159,8 @@ function PlasmicSelect__RenderFunc(props: {
     ...args,
     ...variants
   };
+  const refsRef = React.useRef({});
+  const $refs = refsRef.current;
 
   const currentUser = p.useCurrentUser?.() || {};
 
@@ -313,11 +315,19 @@ function PlasmicSelect__RenderFunc(props: {
           disabled={
             hasVariant($state, "isDisabled", "isDisabled") ? true : undefined
           }
+          ref={ref => {
+            $refs["trigger"] = ref;
+          }}
         >
           <div
             data-plasmic-name={"contentContainer"}
             data-plasmic-override={overrides.contentContainer}
             className={classNames(projectcss.all, sty.contentContainer, {
+              [sty.contentContainercolor_clear]: hasVariant(
+                $state,
+                "color",
+                "clear"
+              ),
               [sty.contentContainercolor_softBlue]: hasVariant(
                 $state,
                 "color",

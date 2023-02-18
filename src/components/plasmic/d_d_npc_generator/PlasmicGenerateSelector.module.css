@@ -83,11 +83,10 @@
   max-width: 100%;
   position: relative;
   width: 100%;
-  min-width: 0;
-}
-.text__zDlfW {
-  color: #ffffff;
   font-size: 24px;
+  background: #ffffff00;
+  min-width: 0;
+  border-radius: 6px;
 }
 .text___3NIn0 {
   font-size: 24px;
@@ -146,10 +145,6 @@
   width: 100%;
   min-width: 0;
 }
-.text__rrDrL {
-  color: #ffffff;
-  font-size: 24px;
-}
 .text__qhhCc {
   font-size: 24px;
 }
@@ -206,10 +201,6 @@
   position: relative;
   width: 100%;
   min-width: 0;
-}
-.text__owfoi {
-  color: #ffffff;
-  font-size: 24px;
 }
 .text__mfdsW {
   font-size: 24px;
@@ -273,7 +264,7 @@
   font-size: 24px;
   margin-right: 8px;
 }
-.svg__wXq3R {
+.abilityScoreTooltip {
   position: relative;
   object-fit: cover;
   max-width: 100%;
@@ -287,10 +278,6 @@
   position: relative;
   width: 100%;
   min-width: 0;
-}
-.text__phpLi {
-  color: #ffffff;
-  font-size: 24px;
 }
 .text___8H9Lu {
   font-size: 24px;
@@ -348,10 +335,6 @@
   position: relative;
   width: 100%;
   min-width: 0;
-}
-.text__p2Ny9 {
-  color: #ffffff;
-  font-size: 24px;
 }
 .text__cVlnv {
   font-size: 24px;
@@ -551,10 +534,6 @@
   width: 100%;
   min-width: 0;
 }
-.text__szSqE {
-  color: #ffffff;
-  font-size: 24px;
-}
 .text__dylCt {
   font-size: 24px;
 }
@@ -617,7 +596,7 @@
   font-size: 24px;
   margin-right: 8px;
 }
-.svg__oMqFh {
+.diversityTooltip {
   position: relative;
   object-fit: cover;
   max-width: 100%;
@@ -626,24 +605,45 @@
   color: #ffffff;
   flex-shrink: 0;
 }
-.diversitySelect:global(.__wab_instance) {
-  max-width: 100%;
+.freeBox__pGiud {
+  display: flex;
   position: relative;
+  flex-direction: row;
+  align-items: center;
+  justify-content: flex-start;
   width: 100%;
+  height: auto;
+  max-width: 100%;
   min-width: 0;
 }
-.text__eGlAt {
+.text___7V0Id {
+  position: relative;
+  width: auto;
+  height: auto;
+  max-width: 800px;
   color: #ffffff;
-  font-size: 24px;
+  margin-right: 5px;
+  text-align: left;
+  min-width: 100px;
 }
-.text__ywtro {
-  font-size: 24px;
-}
-.option___3Sukb:global(.__wab_instance) {
+.diversitySlider:global(.__wab_instance) {
+  width: 100%;
+  max-width: 100%;
+  object-fit: cover;
   position: relative;
+  min-width: 0;
 }
-.option__m5Y2R:global(.__wab_instance) {
+.text__glwVw {
   position: relative;
+  width: auto;
+  height: auto;
+  max-width: 800px;
+  color: #ffffff;
+  margin-left: 5px;
+  text-align: right;
+}
+.texttavern__glwVw6EOuz {
+  display: none;
 }
 .freeBox___7GqXv {
   flex-direction: column;
@@ -698,7 +698,7 @@
   font-size: 24px;
   margin-right: 8px;
 }
-.svg__xiAx9 {
+.economicsTooltip {
   position: relative;
   object-fit: cover;
   max-width: 100%;
@@ -712,10 +712,6 @@
   position: relative;
   width: 100%;
   min-width: 0;
-}
-.text__dyIvu {
-  color: #ffffff;
-  font-size: 24px;
 }
 .text__sXe7 {
   font-size: 24px;
@@ -779,7 +775,7 @@
   font-size: 24px;
   margin-right: 8px;
 }
-.svg__l1Bt {
+.alignmentTooltip {
   position: relative;
   object-fit: cover;
   max-width: 100%;
@@ -788,15 +784,11 @@
   color: #ffffff;
   flex-shrink: 0;
 }
-.economicsSelect2:global(.__wab_instance) {
+.alignmentDistributionSelect:global(.__wab_instance) {
   max-width: 100%;
   position: relative;
   width: 100%;
   min-width: 0;
-}
-.text__n2Eb0 {
-  color: #ffffff;
-  font-size: 24px;
 }
 .text__vFy3U {
   font-size: 24px;
@@ -867,7 +859,7 @@
 .plotHookPercentage:global(.__wab_instance) {
   max-width: 100%;
   position: relative;
-  width: 50px;
+  width: 80px;
   flex-shrink: 0;
 }
 .svg__k1Mv1 {
@@ -953,7 +945,7 @@
 .totalCount:global(.__wab_instance) {
   max-width: 100%;
   position: relative;
-  width: 50px;
+  width: 80px;
   flex-shrink: 0;
 }
 .svg__yrrCo {

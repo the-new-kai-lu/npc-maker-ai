@@ -1,16 +1,14 @@
 import * as React from "react";
-import {
-  PlasmicHomepage,
-  DefaultHomepageProps
-} from "./plasmic/d_d_npc_generator/PlasmicHomepage";
-import { HTMLElementRefOf } from "@plasmicapp/react-web";
-import {ALIGNMENT, NPC} from "../models/npc";
-import { useState } from "react";
+import {useState} from "react";
+import {DefaultHomepageProps, PlasmicHomepage} from "./plasmic/d_d_npc_generator/PlasmicHomepage";
+import {HTMLElementRefOf} from "@plasmicapp/react-web";
+import {ALIGNMENT, NPC, RACE} from "../models/npc";
 
 const dummyNPC: NPC = {
   first_name: 'Sir Reginald',
   last_name: 'Barnaby Rutherford',
   portrait: undefined,
+  race: RACE.HUMAN,
   age: 76,
   gender: true,
   height_inches: 72,
@@ -33,6 +31,7 @@ const dummyNPCs: NPC[] = [{
   first_name: 'Some',
   last_name: 'Guy',
   portrait: undefined,
+  race: RACE.HUMAN,
   age: 21,
   gender: true,
   height_inches: 72,
@@ -56,6 +55,7 @@ const dummyNPCs: NPC[] = [{
   portrait: undefined,
   age: 76,
   gender: true,
+  race: RACE.HUMAN,
   height_inches: 72,
   weight_lbs: 160,
   str: 18,

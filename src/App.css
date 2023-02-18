@@ -36,3 +36,41 @@
     transform: rotate(360deg);
   }
 }
+
+.MuiOutlinedInput-notchedOutline {
+  border-color: #dbdbd7 !important;
+  border-width: 1px !important;
+}
+
+.MuiSvgIcon-root {
+  color: #dbdbd7 !important;
+}
+
+.MuiSlider-rail {
+  background-color: #dbdbd7 !important;
+}
+
+.MuiSlider-track {
+  background-color: white !important;
+}
+
+.MuiSlider-thumb {
+  color: white !important;
+  box-shadow: none !important;
+}
+
+.MuiSlider-thumb:focus {
+  box-shadow: 0 3px 1px rgba(0,0,0,0.1),0 4px 8px rgba(0,0,0,0.3),0 0 0 1px rgba(0,0,0,0.02) !important;
+}
+
+.MuiSlider-thumb:hover {
+  box-shadow: 0 3px 1px rgba(0,0,0,0.1),0 4px 8px rgba(0,0,0,0.3),0 0 0 1px rgba(0,0,0,0.02) !important;
+}
+
+.MuiSlider-thumb .Mui-active {
+  box-shadow: 0 3px 1px rgba(0,0,0,0.1),0 4px 8px rgba(0,0,0,0.3),0 0 0 1px rgba(0,0,0,0.02) !important;
+}
+
+input[type=number] {
+  color: white !important;
+}

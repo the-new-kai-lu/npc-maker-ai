@@ -25,6 +25,8 @@ export class WeightHeightGenerator {
                 return this.getVal(40)
             case RACE.GNOME:
                 return this.getVal(40)
+            case RACE.DRAGONBORN:
+                return this.getVal(238)
         }
     }
 
@@ -46,6 +48,8 @@ export class WeightHeightGenerator {
                 return this.getVal(36)
             case RACE.GNOME:
                 return this.getVal(40)
+            case RACE.DRAGONBORN:
+                return this.getVal(75)
         }
     }
 
@@ -78,6 +82,8 @@ export class WeightHeightGenerator {
                 return this.getAgeFromRange(20, 40, 133, 250)
             case RACE.GNOME:
                 return this.getAgeFromRange(20, 40, 180, 400)
+            case RACE.DRAGONBORN:
+                return this.getAgeFromRange(15, 25, 50, 80)
         }
     }
 }
