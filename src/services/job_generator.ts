@@ -67,6 +67,11 @@ export const JOBS: Job[] = [
     {name: "Thug", descriptors: [JOB_DESCRIPTOR.URBAN, JOB_DESCRIPTOR.UNLAWFUL, JOB_DESCRIPTOR.MARTIAL]},
     {name: "Mercenary", descriptors: [JOB_DESCRIPTOR.URBAN, JOB_DESCRIPTOR.UNLAWFUL, JOB_DESCRIPTOR.MARTIAL]},
     {name: "Black Market Dealer", descriptors: [JOB_DESCRIPTOR.URBAN, JOB_DESCRIPTOR.UNLAWFUL]},
+    {name: "Guard Captain", descriptors: []},
+    {name: "Poison Maker", descriptors: []},
+    {name: "Monk", descriptors: []},
+    {name: "Artificer", descriptors: []},
+    {name: "Officer", descriptors: []}
 ]
 
 export class JobGenerator {
