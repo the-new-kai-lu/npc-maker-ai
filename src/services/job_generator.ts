@@ -1,3 +1,5 @@
+import {table1} from "../models/job_weights";
+
 export interface Job {
     name: string,
     descriptors: JOB_DESCRIPTOR[]
@@ -72,4 +74,17 @@ export class JobGenerator {
         const filtered = JOBS.filter(j => filters.reduce((v, desc) => v && j.descriptors.includes(desc), true))
         return filtered[Math.floor((filtered.length)*Math.random())].name
     }
+}
+
+export function getRandomJob(w: number[]) {
+    let weights = []
+    let names = []
+    for (let k in table1) {
+        weights.push(table1[k as keyof typeof table1] * w[0] * w[1] * w[2])
+        names.push(k)
+    }
+
+    const weightedRandom = require('weighted-random');
+    const select = weightedRandom(weights)
+    return names[select]
 }
