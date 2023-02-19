@@ -11,22 +11,24 @@ export interface GenerateInput {
 }
 
 export interface GenerateData {
-    gender: boolean | null,
-    race: RACE | null,
-    alignment: ALIGNMENT | null,
+    gender: boolean,
+    race: RACE,
+    alignment: ALIGNMENT,
     stats: STAT_METHOD,
     job: string,
     hasPlot: boolean
 }
 
 export function formatInput(input: GenerateInput): GenerateData {
-    let gender: boolean | null = null
+    let gender: boolean
     if (input.genderVal === 'Male') {
         gender = true
     } else if (input.genderVal === 'Female') {
         gender = false
+    } else {
+        gender = Math.random() < 0.5
     }
-    let race: RACE | null
+    let race: RACE
     switch (input.raceVal) {
         case "Human":
             race = RACE.HUMAN
@@ -56,7 +58,7 @@ export function formatInput(input: GenerateInput): GenerateData {
             race = RACE.DRAGONBORN
             break
         default:
-            race = null
+            race = RACE[Object.keys(RACE)[Math.floor(Math.random() * Object.keys(RACE).length)] as keyof typeof RACE]
     }
     let alignment: ALIGNMENT | null
     switch (input.alignmentVal) {
@@ -88,7 +90,7 @@ export function formatInput(input: GenerateInput): GenerateData {
             alignment = ALIGNMENT.CE
             break
         default:
-            alignment = null
+            alignment = Math.floor(Math.random()*9) as ALIGNMENT
     }
     let stats: STAT_METHOD
     switch (input.abilityScoreVal) {

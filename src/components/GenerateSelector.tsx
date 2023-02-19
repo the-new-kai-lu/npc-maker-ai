@@ -9,6 +9,7 @@ import {MenuItem, Select, SelectChangeEvent, Slider} from "@mui/material";
 import {JOBS} from "../services/job_generator";
 import { Tooltip } from 'react-tooltip'
 import {GenerateInput} from "../services/format_data";
+import {RACE} from "../models/npc";
 
 
 export interface GenerateSelectorProps extends DefaultGenerateSelectorProps {
@@ -216,7 +217,7 @@ function GenerateSelector_(props: GenerateSelectorProps, ref: HTMLElementRefOf<"
                                            labelId={"economicsSelect"}
                                            id={"economicsSelect"}
                                            value={economics}
-                                           onChange={e => handleChange(e, setAbilityVal)}
+                                           onChange={e => handleChange(e, setEconomics)}
                                            style={{width: '100%', fontFamily: 'Inter', color: '#ffffff', borderRadius: '6px', fontSize: '20px'}}
                                            inputProps={{
                                                inputProps: {
