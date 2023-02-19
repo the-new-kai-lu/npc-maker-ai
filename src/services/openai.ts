@@ -10,6 +10,18 @@ export class DescriptionWriter {
         this.api = new OpenAIApi(new Configuration({apiKey: key}))
     }
 
+    private capitalize(s: string) {
+        return s.charAt(0).toUpperCase() + s.slice(1)
+    }
+
+    private generateInitialPrompt() {
+        let prompt = ""
+        const full_name = this.npc.first_name + " " + this.npc.last_name
+        const gender = this.npc.gender?"male":"female"
+        const subjPronoun = this.npc.gender?"he":"she"
+        const possPronoun = this.npc.gender?"his":"her"
+        const objPronoun = this.npc.gender?"him":"her"
+    }
     async getPhysicalDescription() {
         const prompt = `${this.npc.first_name} ${this.npc.last_name} is a ${this.npc.gender?"male":"female"} ${this.npc.race.toLowerCase()} ${this.npc.class} in a fantasy game. ${this.npc.gender?"He":"She"} stands ${Math.floor(this.npc.height_inches/12)} feet and ${this.npc.height_inches%12} inches tall, and weighs ${this.npc.weight_lbs} lbs. `
         const promptFinishers = [

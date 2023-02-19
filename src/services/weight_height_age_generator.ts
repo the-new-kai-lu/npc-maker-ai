@@ -7,6 +7,19 @@ export class WeightHeightGenerator {
         const dist = gaussian(mean, 0.0425*mean)
         return Math.round(dist.ppf(Math.random()))
     }
+
+    private static getDescriptorRange(mean: number, val: number) {
+        const low = mean - (0.0425*mean)
+        const high = mean + (0.0425*mean)
+        if (val > high) {
+            return 1
+        } else if (val < low) {
+            return -1
+        } else {
+            return 0
+        }
+    }
+
     static getWeight(race: RACE) {
         switch (race) {
             case RACE.HUMAN:
@@ -53,6 +66,29 @@ export class WeightHeightGenerator {
         }
     }
 
+    static getWeightHeightDescriptor(race: RACE, weight: number, height: number) {
+        switch (race) {
+            case RACE.HUMAN:
+                return [this.getDescriptorRange(67, height), this.getDescriptorRange(165, weight)]
+            case RACE.ELF:
+                return [this.getDescriptorRange(65, height), this.getDescriptorRange(128, weight)]
+            case RACE.HALF_ELF:
+                return [this.getDescriptorRange(66, height), this.getDescriptorRange(155, weight)]
+            case RACE.DWARF:
+                return [this.getDescriptorRange(53, height), this.getDescriptorRange(165, weight)]
+            case RACE.GOBLIN:
+                return [this.getDescriptorRange(46, height), this.getDescriptorRange(40, weight)]
+            case RACE.HALF_ORC:
+                return [this.getDescriptorRange(69, height), this.getDescriptorRange(217, weight)]
+            case RACE.HALFLING:
+                return [this.getDescriptorRange(36, height), this.getDescriptorRange(40, weight)]
+            case RACE.GNOME:
+                return [this.getDescriptorRange(40, height), this.getDescriptorRange(40, weight)]
+            case RACE.DRAGONBORN:
+                return [this.getDescriptorRange(75, height), this.getDescriptorRange(238, weight)]
+        }
+    }
+
     private static getAgeFromRange(low: number, lowMid: number, highMid: number, high: number) {
         const x = Math.random()
         if (x < 0.4) {
@@ -61,6 +97,16 @@ export class WeightHeightGenerator {
             return lowMid + Math.round((highMid-lowMid)*Math.random())
         } else {
             return highMid + Math.round((high-highMid)*Math.random())
+        }
+    }
+
+    private static ageRange(lowMid: number, highMid: number, val: number) {
+        if (val >= highMid) {
+            return 2
+        } else if (val >= lowMid) {
+            return 1
+        } else {
+            return 0
         }
     }
 
@@ -84,6 +130,29 @@ export class WeightHeightGenerator {
                 return this.getAgeFromRange(20, 40, 180, 400)
             case RACE.DRAGONBORN:
                 return this.getAgeFromRange(15, 25, 50, 80)
+        }
+    }
+
+    static getAgeDescriptor(race: RACE, age: number) {
+        switch (race) {
+            case RACE.HUMAN:
+                return this.ageRange( 30, 55, age)
+            case RACE.ELF:
+                return this.ageRange( 350, 550, age)
+            case RACE.HALF_ELF:
+                return this.ageRange( 50, 150, age)
+            case RACE.DWARF:
+                return this.ageRange( 50, 188, age)
+            case RACE.GOBLIN:
+                return this.ageRange( 20, 27, age)
+            case RACE.HALF_ORC:
+                return this.ageRange( 45, 55, age)
+            case RACE.HALFLING:
+                return this.ageRange( 40, 133, age)
+            case RACE.GNOME:
+                return this.ageRange( 40, 180, age)
+            case RACE.DRAGONBORN:
+                return this.ageRange( 25, 50, age)
         }
     }
 }
