@@ -6,10 +6,9 @@ import {
 import { HTMLElementRefOf } from "@plasmicapp/react-web";
 import {useState} from "react";
 import {MenuItem, Select, SelectChangeEvent, Slider} from "@mui/material";
-import {JOBS} from "../services/job_generator";
 import { Tooltip } from 'react-tooltip'
 import {GenerateInput} from "../services/format_data";
-import {RACE} from "../models/npc";
+import { JOBS, JOB_TYPES } from "../models/job_weights";
 
 
 export interface GenerateSelectorProps extends DefaultGenerateSelectorProps {
@@ -38,12 +37,16 @@ function GenerateSelector_(props: GenerateSelectorProps, ref: HTMLElementRefOf<"
         handler(event.target.value)
     }
 
+    const getSelectionsByArray = (choices: string[]) => {
+        return [<MenuItem value={"Random"} style={{fontFamily: 'Inter', fontSize: '18px'}}>Random</MenuItem>, ...choices.map(c => <MenuItem value={c} style={{fontFamily: 'Inter', fontSize: '18px'}}>{c}</MenuItem>)]
+    }
+
     const getSelections = (...choices: string[]) => {
         return [<MenuItem value={"Random"} style={{fontFamily: 'Inter', fontSize: '18px'}}>Random</MenuItem>, ...choices.map(c => <MenuItem value={c} style={{fontFamily: 'Inter', fontSize: '18px'}}>{c}</MenuItem>)]
     }
 
     const getJobs = () => {
-        return [<MenuItem value={"Random"} style={{fontFamily: 'Inter', fontSize: '18px'}}>Random</MenuItem>, ...JOBS.map(c => <MenuItem value={c.name} style={{fontFamily: 'Inter', fontSize: '18px'}}>{c.name}</MenuItem>)]
+        return [<MenuItem value={"Random"} style={{fontFamily: 'Inter', fontSize: '18px'}}>Random</MenuItem>, ...Object.keys(JOBS).filter(job => Number.isNaN(parseInt(job))).map(job => <MenuItem value={job} style={{fontFamily: 'Inter', fontSize: '18px'}}>{job}</MenuItem>)]
     }
 
   return <>
@@ -61,13 +64,21 @@ function GenerateSelector_(props: GenerateSelectorProps, ref: HTMLElementRefOf<"
                                       if (tavern) {
                                           //TODO
                                       } else {
+                                          let jobType = JOB_TYPES[economics];
+                                          if (jobType === undefined) {
+                                            const jobTypeKeys = Object.keys(JOB_TYPES);
+                                            const randomIndex = Math.floor(Math.random() * (jobTypeKeys.length + 1));
+                                            jobType = JOB_TYPES[randomIndex]
+                                          }
+
                                           const input: GenerateInput = {
                                               genderVal,
                                               raceVal,
                                               alignmentVal,
                                               abilityScoreVal,
                                               jobVal,
-                                              plot
+                                              plot,
+                                              jobType
                                           }
                                           props.generateButtonClick({input, tavern: false})
                                       }
@@ -216,8 +227,8 @@ function GenerateSelector_(props: GenerateSelectorProps, ref: HTMLElementRefOf<"
                                        <Select
                                            labelId={"economicsSelect"}
                                            id={"economicsSelect"}
-                                           value={economics}
-                                           onChange={e => handleChange(e, setEconomics)}
+                                           value={JOB_TYPES[economics]?.displayName ?? "Random"}
+                                           onChange={e => setEconomics(Object.keys(JOB_TYPES).find(jobType => JOB_TYPES[jobType].displayName === e.target.value) ?? "random")}
                                            style={{width: '100%', fontFamily: 'Inter', color: '#ffffff', borderRadius: '6px', fontSize: '20px'}}
                                            inputProps={{
                                                inputProps: {
@@ -225,7 +236,7 @@ function GenerateSelector_(props: GenerateSelectorProps, ref: HTMLElementRefOf<"
                                                }
                                            }}
                                        >
-                                           {getSelections("Upper Class", "Middle Class", "Lower Class", "Rural Lower Class", "Rural Upper Class", "Rural Mixed", "Urban Lower Class", "Urban Middle Class", "Urban Upper Class", "Urban Mixed", "Religious", "Wartime", "Shady")}
+                                           {getSelectionsByArray(Object.keys(JOB_TYPES).map(jobType => JOB_TYPES[jobType].displayName))}
                                        </Select>
                                    )
                                }}
