@@ -69,7 +69,7 @@ function GenerateSelector_(props: GenerateSelectorProps, ref: HTMLElementRefOf<"
                                               jobVal,
                                               plot
                                           }
-                                          props.generateButtonClick(input)
+                                          props.generateButtonClick({input, tavern: false})
                                       }
                                   }
                                 }
