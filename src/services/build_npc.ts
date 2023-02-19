@@ -30,9 +30,9 @@ export function build_single_npc(generation_seed: GenerateData) {
 }
 
 function get_first_name(race: RACE) {
-    return ""
+    return "FirstName"
 }
 
 function get_last_name(race: RACE) {
-    return ""
+    return "LastName"
 }

@@ -5,6 +5,7 @@ import {HTMLElementRefOf} from "@plasmicapp/react-web";
 import {ALIGNMENT, NPC, RACE} from "../models/npc";
 import {build_single_npc} from "../services/build_npc";
 import {formatInput} from "../services/format_data";
+import {DescriptionWriter} from "../services/openai";
 
 const dummyNPC: NPC = {
   first_name: 'Sir Reginald',
@@ -132,7 +133,10 @@ function Homepage_(props: HomepageProps, ref: HTMLElementRefOf<"div">) {
           if (data.tavern) {
             // TODO
           } else {
-            setNpc(build_single_npc(formatInput(data.input)))
+            const npc = build_single_npc(formatInput(data.input))
+            const descriptionWriter = new DescriptionWriter("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", npc)
+            console.log(npc)
+            console.log(descriptionWriter.generateInitialPrompt())
           }
         }
       }
