@@ -1,7 +1,7 @@
 export interface NPC {
     first_name: string,
     last_name: string,
-    portrait?: Buffer,
+    portrait?: string,
     age: number,
     gender: boolean,
     height_inches: number,

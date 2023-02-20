@@ -6,7 +6,7 @@ import {
   DefaultInfoPanelProps
 } from "./plasmic/d_d_npc_generator/PlasmicInfoPanel";
 import { HTMLElementRefOf } from "@plasmicapp/react-web";
-import { NPC } from "../models/npc";
+import {ALIGNMENT, NPC} from "../models/npc";
 
 export interface InfoPanelProps extends DefaultInfoPanelProps {
   npc?: NPC;
@@ -29,23 +29,26 @@ function InfoPanel_(props: InfoPanelProps, ref: HTMLElementRefOf<"div">) {
   return <PlasmicInfoPanel
     root={{ ref }}
     name2={{ props: { children: `${npc.first_name} ${npc.last_name}`} }}
-    name={{ props: { children: `${npc.last_name}, ${npc.first_name}` } }}
+    name={{ props: { children: npc.race } }}
     age={{ props: { children: npc.age } }}
     gender={{ props: { children: npc.gender ? 'Male' : 'Female' } }}
     height={{ props: { children: heightConversion(npc.height_inches) } }}
     height2={{ props: { children: `${npc.weight_lbs} lbs` } }}
-    descriptionBox={{ props: { children: <p>{npc.physical_description}</p> } }}
+    descriptionBox={{ props: { children: <p style={{color: 'black'}}>{npc.physical_description}</p>, style: {overflowY: 'scroll'} } }}
     str={{ props: { children: npc.str } }}
     dex={{ props: { children: npc.dex } }}
     con={{ props: { children: npc.con } }}
     int={{ props: { children: npc.int } }}
     wis={{ props: { children: npc.wis } }}
     cha={{ props: { children: npc.cha } }}
-    alignment={{ props: { children: npc.alignment } }}
+    alignment={{ props: { children: ALIGNMENT[npc.alignment] } }}
     job={{ props: { children: npc.class } }}
-    personalityBox={{ props: { children: <p>{npc.personality_description}</p> } }}
-    historyBox={{ props: { children: <p>{npc.history}</p> } }}
-    plotBox={{ props: { children: <p>{npc.plot_hook}</p> } }}
+    personalityBox={{ props: { children: <p style={{color: 'black'}}>{npc.personality_description}</p>, style: {overflowY: 'scroll'} } }}
+    historyBox={{ props: { children: <p style={{color: 'black'}}>{npc.history}</p>, style: {overflowY: 'scroll'} } }}
+    plotBox={{ props: { children: <p style={{color: 'black'}}>{npc.plot_hook}</p>, style: {overflowY: 'scroll'} } }}
+    portrait={{
+      props: npc.portrait != null?{src: npc.portrait}:{}
+    }}
     {...rest}
   />;
 }

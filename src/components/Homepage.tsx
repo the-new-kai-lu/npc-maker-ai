@@ -76,7 +76,7 @@ const dummyNPCs: NPC[] = [{
 }]
 
 export interface HomepageProps extends DefaultHomepageProps {
-  npc?: NPC | NPC[]
+  k: string,
 }
 
 let index = 0;
@@ -113,7 +113,7 @@ function Homepage_(props: HomepageProps, ref: HTMLElementRefOf<"div">) {
   }
 
   return <PlasmicHomepage
-    root={{ ref }}
+    root={{ ref,  }}
     left={{
       props: {
         style: { opacity: npcArray && npcArray.length > 1 ? 1 : 0 },
@@ -133,10 +133,7 @@ function Homepage_(props: HomepageProps, ref: HTMLElementRefOf<"div">) {
           if (data.tavern) {
             // TODO
           } else {
-            const npc = build_single_npc(formatInput(data.input))
-            const descriptionWriter = new DescriptionWriter("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", npc)
-            console.log(npc)
-            console.log(descriptionWriter.generateInitialPrompt())
+            build_single_npc(formatInput(data.input), props.k).then(npc => setNpc(npc))
           }
         }
       }

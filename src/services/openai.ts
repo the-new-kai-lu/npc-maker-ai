@@ -6,10 +6,12 @@ import {StatGenerator} from "./stat_generator";
 export class DescriptionWriter {
     npc: NPC
     api: OpenAIApi
+    initial_prompt: string
 
     constructor(key: string, npc: NPC) {
         this.npc = npc
         this.api = new OpenAIApi(new Configuration({apiKey: key}))
+        this.initial_prompt = this.generateInitialPrompt()
     }
 
     private capitalize(s: string) {
@@ -71,33 +73,90 @@ export class DescriptionWriter {
         return prompt
     }
     async getPhysicalDescription() {
-        const prompt = `${this.npc.first_name} ${this.npc.last_name} is a ${this.npc.gender?"male":"female"} ${this.npc.race.toLowerCase()} ${this.npc.class} in a fantasy game. ${this.npc.gender?"He":"She"} stands ${Math.floor(this.npc.height_inches/12)} feet and ${this.npc.height_inches%12} inches tall, and weighs ${this.npc.weight_lbs} lbs. `
         const promptFinishers = [
-            `Describe what ${this.npc.gender?"he":"she"} looks like.`,
-            `Describe ${this.npc.gender?"his":"her"} physical appearance.`,
-            `Describe what ${this.npc.gender?"his":"her"} face and overall appearance are like.`,
-            `Give a detailed description of ${this.npc.gender?"his":"her"} appearance.`,
-            `What does ${this.npc.gender?"he":"she"} look like?`,
-            `Describe ${this.npc.gender?"his":"her"} most important physical features.`
+            `\nDescribe what ${this.npc.gender?"he":"she"} looks like.`,
+            `\nDescribe ${this.npc.gender?"his":"her"} physical appearance.`,
+            `\nDescribe what ${this.npc.gender?"his":"her"} face and overall appearance are like.`,
+            `\nGive a detailed description of ${this.npc.gender?"his":"her"} appearance.`,
+            `\nWhat does ${this.npc.gender?"he":"she"} look like?`,
+            `\nDescribe ${this.npc.gender?"his":"her"} most important physical features.`
         ]
         const response = await this.api.createCompletion({
             model: 'text-davinci-003',
-            prompt: prompt + promptFinishers[Math.floor(Math.random() * promptFinishers.length)],
+            prompt: this.initial_prompt + promptFinishers[Math.floor(Math.random() * promptFinishers.length)],
             temperature: 0.7,
             top_p: 0.5,
             max_tokens: 256
         })
+        this.npc.physical_description = (response.data.choices[0].text??"").trim()
     }
 
-    getPersonality() {
-
+    async getPersonality() {
+        const promptFinishers = [
+            `\nDescribe ${this.npc.first_name}'s personality.`,
+            `\nDescribe the most important parts of ${this.npc.gender?"his":"her"} personality.`,
+            `\nDescribe ${this.npc.first_name}'s personality traits.`,
+            `\nWhat is ${this.npc.gender?"his":"her"} personality like?`
+        ]
+        const response = await this.api.createCompletion({
+            model: 'text-davinci-003',
+            prompt: this.initial_prompt + '\n' + this.npc.physical_description + promptFinishers[Math.floor(Math.random() * promptFinishers.length)],
+            temperature: 0.7,
+            top_p: 0.5,
+            max_tokens: 256
+        })
+        this.npc.personality_description = (response.data.choices[0].text??"").trim()
     }
 
-    getHistory() {
-
+    async getHistory() {
+        const promptFinishers = [
+            `\nTell me about ${this.npc.gender?"his":"her"} personal history.`,
+            `\nWhat are the most important things that happened in ${this.npc.gender?"his":"her"} life?`,
+            `\nTell me how ${this.npc.first_name} grew up.`,
+            `\nTell me about ${this.npc.gender?"his":"her"} life.`,
+            `\nWhat's ${this.npc.gender?"his":"her"} story so far?`
+        ]
+        const response = await this.api.createCompletion({
+            model: 'text-davinci-003',
+            prompt: this.initial_prompt + '\n' + this.npc.physical_description + '\n' + this.npc.personality_description + promptFinishers[Math.floor(Math.random() * promptFinishers.length)],
+            temperature: 0.7,
+            top_p: 0.5,
+            max_tokens: 256
+        })
+        this.npc.history = (response.data.choices[0].text??"").trim()
     }
 
-    getPlotHook() {
+    async getPlotHook() {
+        const promptFinishers = [
+            `\nGive me 1 quest ${this.npc.first_name} would give.`,
+            `\nTell me 1 quest ${this.npc.first_name} needs someone's help with right now.`,
+            `\nA group of adventurers meets ${this.npc.first_name}. What quest does ${this.npc.gender?"he":"she"} give them?`,
+            `\nA group of adventurers meets ${this.npc.first_name}. What does ${this.npc.gender?"he":"she"} ask them to do?`
+        ]
+        const response = await this.api.createCompletion({
+            model: 'text-davinci-003',
+            prompt: this.initial_prompt + '\n' + this.npc.physical_description + '\n' + this.npc.personality_description + '\n' + this.npc.history + promptFinishers[Math.floor(Math.random() * promptFinishers.length)],
+            temperature: 0.7,
+            top_p: 0.5,
+            max_tokens: 128
+        })
+        this.npc.plot_hook = (response.data.choices[0].text??"").trim()
+    }
 
+    async getPortrait() {
+        const response = await this.api.createImage({
+            prompt: `A portrait of a ${this.npc.gender?"male":"female"} ${this.npc.race.toLowerCase()} ${this.npc.class.toLowerCase()} in a fantasy game, in a digital art style`,
+            n: 1,
+            size: '512x512'
+        })
+        if (response.data != null) {
+            if (response.data.data != null) {
+                if (response.data.data[0] != null) {
+                    if (response.data.data[0].url != null) {
+                        this.npc.portrait = response.data.data[0].url
+                    }
+                }
+            }
+        }
     }
 }

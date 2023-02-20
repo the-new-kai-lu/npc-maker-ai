@@ -9,7 +9,7 @@ function App() {
 
     return (
         <div className="App">
-            {key === ""?<Signup setKey={(k) => {setKey(k);localStorage.setItem("openai_key", k)}} />:<Homepage />}
+            {key === ""?<Signup setKey={(k) => {setKey(k);localStorage.setItem("openai_key", k)}} />:<Homepage k={key}/>}
         </div>
     );
 }

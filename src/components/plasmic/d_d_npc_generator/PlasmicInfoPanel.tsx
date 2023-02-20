@@ -207,7 +207,7 @@ function PlasmicInfoPanel__RenderFunc(props: {
                   sty.text__tdFaz
                 )}
               >
-                {"Name:"}
+                {"Race:"}
               </div>
 
               <div
