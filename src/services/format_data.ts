@@ -1,6 +1,6 @@
 import {ALIGNMENT, RACE} from "../models/npc";
 import {STAT_METHOD} from "./stat_generator";
-import {JOBS} from "./job_generator";
+import { JOBS, JobType } from "../models/job_weights";
 
 export interface GenerateInput {
     genderVal: string,
@@ -8,7 +8,8 @@ export interface GenerateInput {
     alignmentVal: string,
     abilityScoreVal: string,
     jobVal: string,
-    plot: boolean
+    plot: boolean,
+    jobType: JobType
 }
 
 export interface GenerateData {
@@ -106,7 +107,7 @@ export function formatInput(input: GenerateInput): GenerateData {
     }
     let job = input.jobVal
     if (input.jobVal === 'Random') {
-        const jobNameArr = JOBS.map(j => j.name)
+        const jobNameArr = Object.keys(JOBS)
         job = jobNameArr[Math.floor(Math.random()*jobNameArr.length)]
     }
     return {
