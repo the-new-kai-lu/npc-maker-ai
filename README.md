@@ -1,3 +1,13 @@
+# Quickstart
+
+0. Get npm on your machine with `sudo apt install npm`
+1. Delete the .npmrc file
+2. `npm install`
+3. `npm start`
+4. Navigate to [http://localhost:3000](http://localhost:3000) to view it in the browser.
+5. Get an OpenAI secret key and enter in the textbox
+6. Set the parameters you want, hit generate, and be patient as it may take more than a few seconds to load the NPC
+
 # Getting Started with Create React App
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
