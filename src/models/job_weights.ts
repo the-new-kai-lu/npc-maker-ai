@@ -75,169 +75,169 @@ export const JOB_WEIGHTS_INDICES: {[key: string]: number[]} = {
 }
 
 export enum JOBS {
-    Farmer,
-    Shepherd,
-    Fisherman,
-    Minstrel,
-    Trader,
-    Diplomat,
-    Messenger,
-    Baker,
-    Woodsman,
-    Miner,
-    Shopkeeper,
-    Miller,
-    Thatcher,
-    Cook,
-    Prostitute,
-    Bandit,
-    Cultist,
-    Witch,
-    Innkeeper,
-    Sheriff,
-    Blacksmith,
-    Herbalist,
-    Priest,
-    Knight,
-    Noble,
-    Soldier,
-    Stonemason,
-    Clothesmaker,
-    Candlemaker,
-    Artist,
-    Beggar,
-    Thief,
-    Thug,
-    Armorer,
-    Carpenter,
-    Barber,
-    Alchemist,
-    Scholar,
-    Librarian,
-    Artificer,
-    Monk,
-    Inquisitor,
-    BlackMarketDealer,
-    Mercenary,
-    PoisonMaker,
-    Judge,
-    Barrister,
-    Banker,
-    Warden,
-    Enchanter,
-    Guard,
-    GuardCaptain,
-    Officer
+    Farmer = "Farmer",
+    Shepherd = "Shepherd",
+    Fisherman = "Fisherman",
+    Minstrel = "Minstrel",
+    Trader = "Trader",
+    Diplomat = "Diplomat",
+    Messenger = "Messenger",
+    Baker = "Baker",
+    Woodsman = "Woodsman",
+    Miner = "Miner",
+    Shopkeeper = "Shopkeeper",
+    Miller = "Miller",
+    Thatcher = "Thatcher",
+    Cook = "Cook",
+    Prostitute = "Prostitute",
+    Bandit = "Bandit",
+    Cultist = "Cultist",
+    Witch = "Witch",
+    Innkeeper = "Innkeeper",
+    Sheriff = "Sheriff",
+    Blacksmith = "Blacksmith",
+    Herbalist = "Herbalist",
+    Priest = "Priest",
+    Knight = "Knight",
+    Noble = "Noble",
+    Soldier = "Soldier",
+    Stonemason = "Stonemason",
+    Clothesmaker = "Clothesmaker",
+    Candlemaker = "Candlemaker",
+    Artist = "Artist",
+    Beggar = "Beggar",
+    Thief = "Thief",
+    Thug = "Thug",
+    Armorer = "Armorer",
+    Carpenter = "Carpenter",
+    Barber = "Barber",
+    Alchemist = "Alchemist",
+    Scholar = "Scholar",
+    Librarian = "Librarian",
+    Artificer = "Artificer",
+    Monk = "Monk",
+    Inquisitor = "Inquisitor",
+    BlackMarketDealer = "Black Market Dealer",
+    Mercenary = "Mercenary",
+    PoisonMaker = "Poison Maker",
+    Judge = "Judge",
+    Barrister = "Barrister",
+    Banker = "Banker",
+    Warden = "Warden",
+    Enchanter = "Enchanter",
+    Guard = "Guard",
+    GuardCaptain = "Guard Captain",
+    Officer = "Officer"
 }
 
 export const JOB_WEIGHTS: {[key: string]: any} = {
     traveling: {
-        [JOBS[JOBS.Minstrel]]: 0.2,
-        [JOBS[JOBS.Trader]]: 0.5,
-        [JOBS[JOBS.Diplomat]]: 0.1,
-        [JOBS[JOBS.Messenger]]: 0.2
+        [JOBS.Minstrel]: 0.2,
+        [JOBS.Trader]: 0.5,
+        [JOBS.Diplomat]: 0.1,
+        [JOBS.Messenger]: 0.2
     },
     ruralPoorSubsistence: {
-        [JOBS[JOBS.Farmer]]: 0.63,
-        [JOBS[JOBS.Shepherd]]: 0.27,
-        [JOBS[JOBS.Fisherman]]: 0.1
+        [JOBS.Farmer]: 0.63,
+        [JOBS.Shepherd]: 0.27,
+        [JOBS.Fisherman]: 0.1
     },
     ruralPoorResource: {
-        [JOBS[JOBS.Woodsman]]: 0.5,
-        [JOBS[JOBS.Miner]]: 0.5
+        [JOBS.Woodsman]: 0.5,
+        [JOBS.Miner]: 0.5
     },
     ruralPoorGeneral: {
-        [JOBS[JOBS.Shopkeeper]]: 0.4,
-        [JOBS[JOBS.Miller]]: 0.1,
-        [JOBS[JOBS.Baker]]: 0.2,
-        [JOBS[JOBS.Thatcher]]: 0.1,
-        [JOBS[JOBS.Cook]]: 0.2
+        [JOBS.Shopkeeper]: 0.4,
+        [JOBS.Miller]: 0.1,
+        [JOBS.Baker]: 0.2,
+        [JOBS.Thatcher]: 0.1,
+        [JOBS.Cook]: 0.2
     },
     ruralPoorUnlawful: {
-        [JOBS[JOBS.Prostitute]]: 0.3,
-        [JOBS[JOBS.Bandit]]: 0.5,
-        [JOBS[JOBS.Cultist]]: 0.2,
+        [JOBS.Prostitute]: 0.3,
+        [JOBS.Bandit]: 0.5,
+        [JOBS.Cultist]: 0.2,
     },
     ruralRichUnlawful: {
-        [JOBS[JOBS.Witch]]: 1.0
+        [JOBS.Witch]: 1.0
     },
     ruralRichGeneral: {
-        [JOBS[JOBS.Innkeeper]]: 0.2,
-        [JOBS[JOBS.Shopkeeper]]: 0.3,
-        [JOBS[JOBS.Sheriff]]: 0.1,
-        [JOBS[JOBS.Blacksmith]]: 0.15,
-        [JOBS[JOBS.Herbalist]]: 0.1,
-        [JOBS[JOBS.Priest]]: 0.15
+        [JOBS.Innkeeper]: 0.2,
+        [JOBS.Shopkeeper]: 0.3,
+        [JOBS.Sheriff]: 0.1,
+        [JOBS.Blacksmith]: 0.15,
+        [JOBS.Herbalist]: 0.1,
+        [JOBS.Priest]: 0.15
     },
     ruralRichFeudal: {
-        [JOBS[JOBS.Knight]]: 0.3,
-        [JOBS[JOBS.Noble]]: 0.2,
-        [JOBS[JOBS.Soldier]]: 0.5
+        [JOBS.Knight]: 0.3,
+        [JOBS.Noble]: 0.2,
+        [JOBS.Soldier]: 0.5
     },
     urbanPoorGeneral: {
-        [JOBS[JOBS.Stonemason]]: 0.2,
-        [JOBS[JOBS.Clothesmaker]]: 0.2,
-        [JOBS[JOBS.Candlemaker]]: 0.2,
-        [JOBS[JOBS.Artist]]: 0.1,
-        [JOBS[JOBS.Thatcher]]: 0.1,
-        [JOBS[JOBS.Cook]]: 0.2
+        [JOBS.Stonemason]: 0.2,
+        [JOBS.Clothesmaker]: 0.2,
+        [JOBS.Candlemaker]: 0.2,
+        [JOBS.Artist]: 0.1,
+        [JOBS.Thatcher]: 0.1,
+        [JOBS.Cook]: 0.2
     },
     urbanPoorUnlawful: {
-        [JOBS[JOBS.Beggar]]: 0.3,
-        [JOBS[JOBS.Prostitute]]: 0.1,
-        [JOBS[JOBS.Thief]]: 0.35,
-        [JOBS[JOBS.Thug]]: 0.2,
-        [JOBS[JOBS.Cultist]]: 0.05
+        [JOBS.Beggar]: 0.3,
+        [JOBS.Prostitute]: 0.1,
+        [JOBS.Thief]: 0.35,
+        [JOBS.Thug]: 0.2,
+        [JOBS.Cultist]: 0.05
     },
     urbanMiddleGeneral: {
-        [JOBS[JOBS.Shopkeeper]]: 0.3,
-        [JOBS[JOBS.Innkeeper]]: 0.15,
-        [JOBS[JOBS.Blacksmith]]: 0.15,
-        [JOBS[JOBS.Armorer]]: 0.1,
-        [JOBS[JOBS.Carpenter]]: 0.1,
-        [JOBS[JOBS.Artist]]: 0.1,
-        [JOBS[JOBS.Barber]]: 0.1
+        [JOBS.Shopkeeper]: 0.3,
+        [JOBS.Innkeeper]: 0.15,
+        [JOBS.Blacksmith]: 0.15,
+        [JOBS.Armorer]: 0.1,
+        [JOBS.Carpenter]: 0.1,
+        [JOBS.Artist]: 0.1,
+        [JOBS.Barber]: 0.1
     },
     urbanMiddleMagical: {
-        [JOBS[JOBS.Alchemist]]: 0.2,
-        [JOBS[JOBS.Enchanter]]: 0.1,
-        [JOBS[JOBS.Scholar]]: 0.3,
-        [JOBS[JOBS.Librarian]]: 0.2,
-        [JOBS[JOBS.Artificer]]: 0.2
+        [JOBS.Alchemist]: 0.2,
+        [JOBS.Enchanter]: 0.1,
+        [JOBS.Scholar]: 0.3,
+        [JOBS.Librarian]: 0.2,
+        [JOBS.Artificer]: 0.2
     },
     urbanMiddleReligious: {
-        [JOBS[JOBS.Priest]]: 0.35,
-        [JOBS[JOBS.Monk]]: 0.45,
-        [JOBS[JOBS.Inquisitor]]: 0.2
+        [JOBS.Priest]: 0.35,
+        [JOBS.Monk]: 0.45,
+        [JOBS.Inquisitor]: 0.2
     },
     urbanMiddleUnlawful: {
-        [JOBS[JOBS.BlackMarketDealer]]: 0.3,
-        [JOBS[JOBS.Mercenary]]: 0.4,
-        [JOBS[JOBS.PoisonMaker]]: 0.1,
-        [JOBS[JOBS.Prostitute]]: 0.2
+        [JOBS.BlackMarketDealer]: 0.3,
+        [JOBS.Mercenary]: 0.4,
+        [JOBS.PoisonMaker]: 0.1,
+        [JOBS.Prostitute]: 0.2
     },
     urbanRichGeneral: {
-        [JOBS[JOBS.Judge]]: 0.1,
-        [JOBS[JOBS.Barrister]]: 0.2,
-        [JOBS[JOBS.Banker]]: 0.1,
-        [JOBS[JOBS.Artist]]: 0.05,
-        [JOBS[JOBS.Warden]]: 0.05,
-        [JOBS[JOBS.Innkeeper]]: 0.2,
-        [JOBS[JOBS.Shopkeeper]]: 0.3
+        [JOBS.Judge]: 0.1,
+        [JOBS.Barrister]: 0.2,
+        [JOBS.Banker]: 0.1,
+        [JOBS.Artist]: 0.05,
+        [JOBS.Warden]: 0.05,
+        [JOBS.Innkeeper]: 0.2,
+        [JOBS.Shopkeeper]: 0.3
     },
     urbanRichFeudal: {
-        [JOBS[JOBS.Knight]]: 0.65,
-        [JOBS[JOBS.Noble]]: 0.35
+        [JOBS.Knight]: 0.65,
+        [JOBS.Noble]: 0.35
     },
     urbanRichMagical: {
-        [JOBS[JOBS.Alchemist]]: 0.25,
-        [JOBS[JOBS.Enchanter]]: 0.5,
-        [JOBS[JOBS.Artificer]]: 0.25
+        [JOBS.Alchemist]: 0.25,
+        [JOBS.Enchanter]: 0.5,
+        [JOBS.Artificer]: 0.25
     },
     urbanMilitary: {
-        [JOBS[JOBS.Guard]]: 0.2,
-        [JOBS[JOBS.GuardCaptain]]: 0.1,
-        [JOBS[JOBS.Soldier]]: 0.6,
-        [JOBS[JOBS.Officer]]: 0.1
+        [JOBS.Guard]: 0.2,
+        [JOBS.GuardCaptain]: 0.1,
+        [JOBS.Soldier]: 0.6,
+        [JOBS.Officer]: 0.1
     }
 }

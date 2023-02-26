@@ -956,7 +956,7 @@ function PlasmicGenerateSelector__RenderFunc(props: {
                 sty.text__sccWg
               )}
             >
-              {"Number (Max 100)"}
+              {"Number (Max 1000)"}
             </div>
 
             <TextInput

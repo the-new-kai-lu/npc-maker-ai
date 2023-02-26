@@ -1,6 +1,7 @@
 import {ALIGNMENT, RACE} from "../models/npc";
 import {STAT_METHOD} from "./stat_generator";
-import {JOBS, JobType} from "../models/job_weights";
+import {JOB_TYPES, JOBS, JobType} from "../models/job_weights";
+import {JobGenerator} from "./job_generator";
 
 export interface GenerateInput {
     genderVal: string,
@@ -86,7 +87,7 @@ export function formatInput(input: GenerateInput): GenerateData {
     }
     let job = input.jobVal
     if (input.jobVal === 'Random') {
-        const jobNameArr = Object.keys(JOBS)
+        const jobNameArr = Object.values(JOBS)
         job = jobNameArr[Math.floor(Math.random()*jobNameArr.length)]
     }
     return {
@@ -104,7 +105,7 @@ export function formatMultipleInput(input: GenerateMultipleInput): GenerateData[
     const otherRaces = Object.keys(RACE).filter(r => RACE[r as keyof typeof RACE] !== primaryRace)
     const results: GenerateData[] = []
     for (let i = 0; i < input.count; i++) {
-        const gender = Math.random() < (input.genderRatio/100)
+        const gender = Math.random() > (input.genderRatio/100)
         let race = primaryRace
         if (Math.random() < (input.nonPrimaryPercentage/100)) {
             race = RACE[otherRaces[Math.floor(Math.random() * otherRaces.length)] as keyof typeof RACE]
@@ -115,6 +116,15 @@ export function formatMultipleInput(input: GenerateMultipleInput): GenerateData[
             stats = STAT_METHOD.HEROIC_ARRAY
         }
         const hasPlot = Math.random() < (input.plotPercentage/100)
+        let job: string
+        if (input.economicDist.toLowerCase() === 'random') {
+            const jobNameArr = Object.values(JOBS)
+            job = jobNameArr[Math.floor(Math.random()*jobNameArr.length)]
+        } else {
+            const weight_arr = JOB_TYPES[input.economicDist].jobWeights
+            job = JobGenerator.getRandomJob(weight_arr)
+        }
+        results.push({gender, race, alignment, stats, job, hasPlot})
     }
     return results
 }

@@ -3,7 +3,7 @@ import { JOB_WEIGHTS, JOB_WEIGHTS_INDICES } from "../models/job_weights";
 //"Rural", "Standard", "Manor", "Village", "Town", "Estate", "Slums", "City", "City - Military District", "City - Religious District", "City - Palatial District"
 
 export class JobGenerator {
-    public getRandomJob(inputWeights: number[]) {
+    public static getRandomJob(inputWeights: number[]) {
         const weightedRandom = require('weighted-random');
 
         const travelingCheck = Math.random();
@@ -25,7 +25,7 @@ export class JobGenerator {
             let indices = JOB_WEIGHTS_INDICES[tableKey];
             let weight = 1;
             for (let w of indices) {
-                weight *= w;
+                weight *= inputWeights[w];
             }
     
             let table = JOB_WEIGHTS[tableKey];

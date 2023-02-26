@@ -7,7 +7,7 @@ import { HTMLElementRefOf } from "@plasmicapp/react-web";
 import {useState} from "react";
 import {MenuItem, Select, SelectChangeEvent, Slider} from "@mui/material";
 import { Tooltip } from 'react-tooltip'
-import {GenerateInput} from "../services/format_data";
+import {GenerateInput, GenerateMultipleInput} from "../services/format_data";
 import { JOBS, JOB_TYPES } from "../models/job_weights";
 
 
@@ -46,7 +46,7 @@ function GenerateSelector_(props: GenerateSelectorProps, ref: HTMLElementRefOf<"
     }
 
     const getJobs = () => {
-        return [<MenuItem value={"Random"} style={{fontFamily: 'Inter', fontSize: '18px'}}>Random</MenuItem>, ...Object.keys(JOBS).filter(job => Number.isNaN(parseInt(job))).map(job => <MenuItem value={job} style={{fontFamily: 'Inter', fontSize: '18px'}}>{job}</MenuItem>)]
+        return [<MenuItem value={"Random"} style={{fontFamily: 'Inter', fontSize: '18px'}}>Random</MenuItem>, ...Object.values(JOBS).map(job => <MenuItem value={job} style={{fontFamily: 'Inter', fontSize: '18px'}}>{job}</MenuItem>)]
     }
 
   return <>
@@ -62,15 +62,16 @@ function GenerateSelector_(props: GenerateSelectorProps, ref: HTMLElementRefOf<"
                                 props: {
                                   onClick: () => {
                                       if (tavern) {
-                                          console.log({
-                                              diversity: diversity/100,
-                                              economics,
-                                              alignments,
+                                          const input: GenerateMultipleInput = {
                                               primaryRace,
-                                              genderRatio: genderRatio/100,
-                                              plotHookPercentage: plotHookPercentage/100,
-                                              count
-                                          })
+                                              nonPrimaryPercentage: diversity,
+                                              economicDist: economics,
+                                              alignmentDist: alignments,
+                                              genderRatio,
+                                              count,
+                                              plotPercentage: plotHookPercentage
+                                          }
+                                          props.generateButtonClick({input, tavern: true})
                                       } else {
                                           let jobType = JOB_TYPES[economics];
                                           if (jobType === undefined) {
@@ -78,7 +79,6 @@ function GenerateSelector_(props: GenerateSelectorProps, ref: HTMLElementRefOf<"
                                             const randomIndex = Math.floor(Math.random() * (jobTypeKeys.length + 1));
                                             jobType = JOB_TYPES[randomIndex]
                                           }
-
                                           const input: GenerateInput = {
                                               genderVal,
                                               raceVal,
@@ -235,8 +235,8 @@ function GenerateSelector_(props: GenerateSelectorProps, ref: HTMLElementRefOf<"
                                        <Select
                                            labelId={"economicsSelect"}
                                            id={"economicsSelect"}
-                                           value={economics}
-                                           onChange={e => setEconomics(e.target.value)}
+                                           value={JOB_TYPES[economics]?.displayName ?? "Random"}
+                                           onChange={e => setEconomics(Object.keys(JOB_TYPES).find(jobType => JOB_TYPES[jobType].displayName === e.target.value) ?? "random")}
                                            style={{width: '100%', fontFamily: 'Inter', color: '#ffffff', borderRadius: '6px', fontSize: '20px'}}
                                            inputProps={{
                                                inputProps: {
@@ -274,7 +274,7 @@ function GenerateSelector_(props: GenerateSelectorProps, ref: HTMLElementRefOf<"
                                totalCount={{
                                    type: "number",
                                    value: count,
-                                   onChange: (e) => setCount(Math.min(Math.max(parseInt(e.target.value), 1), 100))
+                                   onChange: (e) => setCount(Math.min(Math.max(parseInt(e.target.value), 1), 1000))
                                }}
                                diversityTooltip={{
                                    className: "diversityInfo"
@@ -296,7 +296,7 @@ function GenerateSelector_(props: GenerateSelectorProps, ref: HTMLElementRefOf<"
       <Tooltip anchorSelect=".tavernInfo" place="right">
           <p>This generator is suitable for creating taverns, towns, and other kinds of crowds!</p>
           <p>The options on this page are statistical; the generated NPCs may not match exactly to the set values.</p>
-          <p>NPCs generated are 85% NPC array stats, and 15% heroic array stats.</p>
+          <p>NPCs generated are 85% NPC array stats, and 15% heroic array.</p>
       </Tooltip>
       <Tooltip anchorSelect=".diversityInfo" place="right">
           <p>Sets the percentage of resulting NPCs which are not the primary race.</p>
