@@ -305,7 +305,15 @@ function GenerateSelector_(props: GenerateSelectorProps, ref: HTMLElementRefOf<"
           <p>Sets the job distribution of the resulting NPCs.</p>
           <p><b>Random:</b> Jobs will be selected at random from all available jobs, each equally likely.</p>
           <p><b>Rural:</b> Represents a small medieval village. Most resulting NPCs perform subsistence farming, and few NPCs possess means.</p>
-          <p><b>Standard:</b> </p>
+          <p><b>Manor:</b> Represents a landed noble's home in the country. NPCs possess rural jobs, but tend to possess means.</p>
+          <p><b>Village: </b> Represents a lower income suburban/small urban area. NPCs have a mix of rural and urban jobs.</p>
+          <p><b>Town: </b> Represents an average suburban/small urban area.</p>
+          <p><b>Estates: </b> Represents a higher income suburban/small urban area.</p>
+          <p><b>Slums: </b> Represents a lower income major urban area. NPCs have jobs typical of urban areas.</p>
+          <p><b>City: </b> Represents the typical major urban area.</p>
+          <p><b>Noble Quarter: </b> Represents a higher income major urban area.</p>
+          <p><b>Military District: </b> Represents a heavily militarized region. NPCs will overwhelmingly possess military jobs or military adjacent jobs.</p>
+          <p><b>Religious District: </b> Represents a highly religious region. NPCs will overwhelmingly possess religious jobs or religious adjacent jobs.</p>
       </Tooltip>
       <Tooltip anchorSelect=".alignmentInfo" place="right">
           <p>Sets the alignment distribution of the resulting NPCs.</p>

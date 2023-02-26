@@ -1,4 +1,4 @@
-import {NPC} from "../models/npc";
+import {ALIGNMENT, NPC} from "../models/npc";
 import {Configuration, OpenAIApi} from "openai";
 import {WeightHeightGenerator} from "./weight_height_age_generator";
 import {StatGenerator} from "./stat_generator";
@@ -59,6 +59,29 @@ export class DescriptionWriter {
             }
         }
 
+        const align_d = () => {
+            switch (this.npc.alignment) {
+                case ALIGNMENT.LG:
+                    return `${this.npc.gender?"His":"Her"} in-game alignment is Lawful Good.`
+                case ALIGNMENT.LN:
+                    return `${this.npc.gender?"His":"Her"} in-game alignment is Lawful Neutral.`
+                case ALIGNMENT.LE:
+                    return `${this.npc.gender?"His":"Her"} in-game alignment is Lawful Evil.`
+                case ALIGNMENT.NG:
+                    return `${this.npc.gender?"His":"Her"} in-game alignment is Neutral Good.`
+                case ALIGNMENT.TN:
+                    return `${this.npc.gender?"His":"Her"} in-game alignment is Neutral.`
+                case ALIGNMENT.NE:
+                    return `${this.npc.gender?"His":"Her"} in-game alignment is Neutral Evil.`
+                case ALIGNMENT.CG:
+                    return `${this.npc.gender?"His":"Her"} in-game alignment is Chaotic Good.`
+                case ALIGNMENT.CN:
+                    return `${this.npc.gender?"His":"Her"} in-game alignment is Chaotic Neutral.`
+                case ALIGNMENT.CE:
+                    return `${this.npc.gender?"His":"Her"} in-game alignment is Chaotic Evil.`
+            }
+        }
+
         prompt += `${full_name} is a ${gender} ${race} ${job} in a fantasy game.` //basic description
         prompt += ` ${this.capitalize(subjPronoun)} stands ${Math.floor(this.npc.height_inches/12)} feet and ${this.npc.height_inches%12} inches tall, which is ${h_d()} for ${possPronoun} race, and weighs ${this.npc.weight_lbs} lbs, meaning ${subjPronoun} ${w_d()} for ${possPronoun} race.` //weight and height description
         prompt += ` ${this.capitalize(subjPronoun)} is ${this.npc.age} years old, making ${age_d()}` //age description
@@ -70,6 +93,7 @@ export class DescriptionWriter {
         if (mental_d !== '') {
             prompt += ` ${this.capitalize(subjPronoun)} ${mental_d}`
         }
+        prompt += ` ${align_d()}`
         return prompt
     }
     async getPhysicalDescription() {
