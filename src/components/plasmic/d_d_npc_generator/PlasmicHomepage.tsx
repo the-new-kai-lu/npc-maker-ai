@@ -32,6 +32,7 @@ import {
   ensureGlobalVariants
 } from "@plasmicapp/react-web";
 import GenerateSelector from "../../GenerateSelector"; // plasmic-import: Aj6PI_7LPB7/component
+import Button from "../../Button"; // plasmic-import: xeFM0tPhg2-/component
 import Fullarrow from "../../Fullarrow"; // plasmic-import: mdBoHorhnE/component
 import InfoPanel from "../../InfoPanel"; // plasmic-import: xuKRzoGfcJ/component
 
@@ -41,6 +42,9 @@ import "@plasmicapp/react-web/lib/plasmic.css";
 
 import projectcss from "./plasmic_d_d_npc_generator.module.css"; // plasmic-import: b5WcywRoms9zdBws8HK6N7/projectcss
 import sty from "./PlasmicHomepage.module.css"; // plasmic-import: 8LcUsItppPWn/css
+
+import ChecksvgIcon from "./icons/PlasmicIcon__Checksvg"; // plasmic-import: 8d9W5hPSEbQ/icon
+import IconIcon from "./icons/PlasmicIcon__Icon"; // plasmic-import: pnFO32SGCAi/icon
 
 export type PlasmicHomepage__VariantMembers = {};
 export type PlasmicHomepage__VariantsArgs = {};
@@ -53,7 +57,10 @@ export const PlasmicHomepage__ArgProps = new Array<ArgPropType>();
 
 export type PlasmicHomepage__OverridesType = {
   root?: p.Flex<"div">;
+  freeBox?: p.Flex<"div">;
   generateSelector?: p.Flex<typeof GenerateSelector>;
+  download?: p.Flex<typeof Button>;
+  text?: p.Flex<"div">;
   displayPanel?: p.Flex<"div">;
   left?: p.Flex<typeof Fullarrow>;
   info?: p.Flex<typeof InfoPanel>;
@@ -117,11 +124,42 @@ function PlasmicHomepage__RenderFunc(props: {
             sty.root
           )}
         >
-          <GenerateSelector
-            data-plasmic-name={"generateSelector"}
-            data-plasmic-override={overrides.generateSelector}
-            className={classNames("__wab_instance", sty.generateSelector)}
-          />
+          {true ? (
+            <p.Stack
+              as={"div"}
+              data-plasmic-name={"freeBox"}
+              data-plasmic-override={overrides.freeBox}
+              hasGap={true}
+              className={classNames(projectcss.all, sty.freeBox)}
+            >
+              <GenerateSelector
+                data-plasmic-name={"generateSelector"}
+                data-plasmic-override={overrides.generateSelector}
+                className={classNames("__wab_instance", sty.generateSelector)}
+              />
+
+              <Button
+                data-plasmic-name={"download"}
+                data-plasmic-override={overrides.download}
+                className={classNames("__wab_instance", sty.download)}
+                color={"clear" as const}
+                shape={"rounded" as const}
+                size={"compact" as const}
+              >
+                <div
+                  data-plasmic-name={"text"}
+                  data-plasmic-override={overrides.text}
+                  className={classNames(
+                    projectcss.all,
+                    projectcss.__wab_text,
+                    sty.text
+                  )}
+                >
+                  {"Download"}
+                </div>
+              </Button>
+            </p.Stack>
+          ) : null}
 
           <p.Stack
             as={"div"}
@@ -164,8 +202,21 @@ function PlasmicHomepage__RenderFunc(props: {
 }
 
 const PlasmicDescendants = {
-  root: ["root", "generateSelector", "displayPanel", "left", "info", "right"],
+  root: [
+    "root",
+    "freeBox",
+    "generateSelector",
+    "download",
+    "text",
+    "displayPanel",
+    "left",
+    "info",
+    "right"
+  ],
+  freeBox: ["freeBox", "generateSelector", "download", "text"],
   generateSelector: ["generateSelector"],
+  download: ["download", "text"],
+  text: ["text"],
   displayPanel: ["displayPanel", "left", "info", "right"],
   left: ["left"],
   info: ["info"],
@@ -176,7 +227,10 @@ type DescendantsType<T extends NodeNameType> =
   (typeof PlasmicDescendants)[T][number];
 type NodeDefaultElementType = {
   root: "div";
+  freeBox: "div";
   generateSelector: typeof GenerateSelector;
+  download: typeof Button;
+  text: "div";
   displayPanel: "div";
   left: typeof Fullarrow;
   info: typeof InfoPanel;
@@ -244,7 +298,10 @@ export const PlasmicHomepage = Object.assign(
   makeNodeComponent("root"),
   {
     // Helper components rendering sub-elements
+    freeBox: makeNodeComponent("freeBox"),
     generateSelector: makeNodeComponent("generateSelector"),
+    download: makeNodeComponent("download"),
+    text: makeNodeComponent("text"),
     displayPanel: makeNodeComponent("displayPanel"),
     left: makeNodeComponent("left"),
     info: makeNodeComponent("info"),

@@ -39,15 +39,15 @@ export const JOB_TYPES: {[key: string]: JobType} = {
         jobWeights: [0.9, 0.8, 0.6, 0.2, 0.05, 0.15, 0.2, 0.05, 0.7, 0.25, 0.1, 0.5, 12, 13, 0.3, 0.6, 0.2, 0.05, 0.15, 0.1, 0.6, 0.2, 0.2, 0.1, 0.05]
     },
     cityMilitaryDistrict: {
-        displayName: "City - Military District",
+        displayName: "Military District",
         jobWeights: [0.9, 0.8, 0.6, 0.2, 0.05, 0.15, 0.2, 0.05, 0.7, 0.25, 0.1, 0.5, 12, 13, 0.3, 0.6, 0.2, 0.05, 0.15, 0.1, 0.6, 0.2, 0.2, 0.1, 0.05]
     },
     cityReligiousDistrict: {
-        displayName: "City - Religious District",
+        displayName: "Religious District",
         jobWeights: [0.9, 0.8, 0.6, 0.2, 0.05, 0.15, 0.2, 0.05, 0.7, 0.25, 0.1, 0.5, 12, 13, 0.3, 0.6, 0.2, 0.05, 0.15, 0.1, 0.6, 0.2, 0.2, 0.1, 0.05]
     },
     cityPalatialDistrict: {
-        displayName: "City - Palatial District",
+        displayName: "Palatial District",
         jobWeights: [0.9, 0.8, 0.6, 0.2, 0.05, 0.15, 0.2, 0.05, 0.7, 0.25, 0.1, 0.5, 12, 13, 0.3, 0.6, 0.2, 0.05, 0.15, 0.1, 0.6, 0.2, 0.2, 0.1, 0.05]
     }
 }
@@ -226,8 +226,8 @@ export const JOB_WEIGHTS: {[key: string]: any} = {
         [JOBS[JOBS.Shopkeeper]]: 0.3
     },
     urbanRichFeudal: {
-        [JOBS[JOBS.Knight]]: 0.6,
-        [JOBS[JOBS.Noble]]: 0.4
+        [JOBS[JOBS.Knight]]: 0.65,
+        [JOBS[JOBS.Noble]]: 0.35
     },
     urbanRichMagical: {
         [JOBS[JOBS.Alchemist]]: 0.25,
@@ -237,7 +237,7 @@ export const JOB_WEIGHTS: {[key: string]: any} = {
     urbanMilitary: {
         [JOBS[JOBS.Guard]]: 0.2,
         [JOBS[JOBS.GuardCaptain]]: 0.1,
-        [JOBS[JOBS.Soldier]]: 0.5,
-        [JOBS[JOBS.Officer]]: 0.2
+        [JOBS[JOBS.Soldier]]: 0.6,
+        [JOBS[JOBS.Officer]]: 0.1
     }
 }

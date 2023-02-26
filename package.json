@@ -4,7 +4,7 @@
   "private": true,
   "dependencies": {
     "@mui/material": "^5.11.9",
-    "@plasmicapp/host": "^1.0.100",
+    "@plasmicapp/host": "^1.0.107",
     "@plasmicapp/react-web": "^0.2.150",
     "@plasmicpkgs/antd": "^2.0.14",
     "@types/gaussian": "^1.2.0",

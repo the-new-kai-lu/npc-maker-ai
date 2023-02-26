@@ -62,7 +62,15 @@ function GenerateSelector_(props: GenerateSelectorProps, ref: HTMLElementRefOf<"
                                 props: {
                                   onClick: () => {
                                       if (tavern) {
-                                          //TODO
+                                          console.log({
+                                              diversity: diversity/100,
+                                              economics,
+                                              alignments,
+                                              primaryRace,
+                                              genderRatio: genderRatio/100,
+                                              plotHookPercentage: plotHookPercentage/100,
+                                              count
+                                          })
                                       } else {
                                           let jobType = JOB_TYPES[economics];
                                           if (jobType === undefined) {
@@ -227,8 +235,8 @@ function GenerateSelector_(props: GenerateSelectorProps, ref: HTMLElementRefOf<"
                                        <Select
                                            labelId={"economicsSelect"}
                                            id={"economicsSelect"}
-                                           value={JOB_TYPES[economics]?.displayName ?? "Random"}
-                                           onChange={e => setEconomics(Object.keys(JOB_TYPES).find(jobType => JOB_TYPES[jobType].displayName === e.target.value) ?? "random")}
+                                           value={economics}
+                                           onChange={e => setEconomics(e.target.value)}
                                            style={{width: '100%', fontFamily: 'Inter', color: '#ffffff', borderRadius: '6px', fontSize: '20px'}}
                                            inputProps={{
                                                inputProps: {
@@ -277,10 +285,34 @@ function GenerateSelector_(props: GenerateSelectorProps, ref: HTMLElementRefOf<"
                                alignmentTooltip={{
                                    className: "alignmentInfo"
                                }}
+                               overallTooltip={{
+                                   className: 'tavernInfo'
+                               }}
                               {...rest} />
       <Tooltip anchorSelect=".abilityScoreInfo" place="right">
           <p><b>NPC Array:</b> Distributes 13, 12, 11, 10, 9, 8 randomly between the 6 stats.</p>
           <p><b>Heroic Array:</b> Distributes 15, 14, 13, 12, 10, 8 randomly between the 6 stats.</p>
+      </Tooltip>
+      <Tooltip anchorSelect=".tavernInfo" place="right">
+          <p>This generator is suitable for creating taverns, towns, and other kinds of crowds!</p>
+          <p>The options on this page are statistical; the generated NPCs may not match exactly to the set values.</p>
+          <p>NPCs generated are 85% NPC array stats, and 15% heroic array stats.</p>
+      </Tooltip>
+      <Tooltip anchorSelect=".diversityInfo" place="right">
+          <p>Sets the percentage of resulting NPCs which are not the primary race.</p>
+      </Tooltip>
+      <Tooltip anchorSelect=".economicsInfo" place="right">
+          <p>Sets the job distribution of the resulting NPCs.</p>
+          <p><b>Random:</b> Jobs will be selected at random from all available jobs, each equally likely.</p>
+          <p><b>Rural:</b> Represents a small medieval village. Most resulting NPCs perform subsistence farming, and few NPCs possess means.</p>
+          <p><b>Standard:</b> </p>
+      </Tooltip>
+      <Tooltip anchorSelect=".alignmentInfo" place="right">
+          <p>Sets the alignment distribution of the resulting NPCs.</p>
+          <p><b>Random:</b> All alignments are equally likely to appear.</p>
+          <p><b>Standard:</b> Standard for a normal medieval society. Individuals are on balance more lawful and more good than not.</p>
+          <p><b>Underworld Standard: </b> Standard for drow and other evil societies/groups. Individuals are on balance more chaotic and more evil than not.</p>
+          <p><b>Other: </b>All alignments that include this alignment are equally likely to appear.</p>
       </Tooltip>
   </>;
 }

@@ -32,7 +32,7 @@ import {
   ensureGlobalVariants
 } from "@plasmicapp/react-web";
 import Select from "antd/lib/select"; // plasmic-import: 2YpGIhkzkpc/codeComponent
-import Select__Option from "../../Select__Option"; // plasmic-import: AQwZIy0fAMn/component
+import { Option } from "rc-select"; // plasmic-import: YRr0RPAdEj/codeComponent
 import Checkbox from "../../Checkbox"; // plasmic-import: nPjHAnzGVYU/component
 import { Slider } from "@plasmicpkgs/antd/skinny/registerSlider"; // plasmic-import: iBC45mjTXv/codeComponent
 import TextInput from "../../TextInput"; // plasmic-import: fvt7-zOYU04/component
@@ -65,6 +65,7 @@ export const PlasmicGenerateSelector__ArgProps = new Array<ArgPropType>();
 
 export type PlasmicGenerateSelector__OverridesType = {
   root?: p.Flex<"div">;
+  overallTooltip?: p.Flex<"svg">;
   genderSelect?: p.Flex<typeof Select>;
   raceSelect?: p.Flex<typeof Select>;
   alignmentSelect?: p.Flex<typeof Select>;
@@ -152,21 +153,53 @@ function PlasmicGenerateSelector__RenderFunc(props: {
         { [sty.roottavern]: hasVariant($state, "tavern", "tavern") }
       )}
     >
-      <div
-        className={classNames(
-          projectcss.all,
-          projectcss.__wab_text,
-          sty.text__vygwa,
-          {
-            [sty.texttavern__vygwa6EOuz]: hasVariant($state, "tavern", "tavern")
-          }
-        )}
-      >
-        {hasVariant($state, "tavern", "tavern")
-          ? "Fill My Tavern!"
-          : "Generate an NPC"}
-      </div>
+      {(hasVariant($state, "tavern", "tavern") ? true : true) ? (
+        <p.Stack
+          as={"div"}
+          hasGap={true}
+          className={classNames(projectcss.all, sty.freeBox__znj6U, {
+            [sty.freeBoxtavern__znj6U6EOuz]: hasVariant(
+              $state,
+              "tavern",
+              "tavern"
+            )
+          })}
+        >
+          <div
+            className={classNames(
+              projectcss.all,
+              projectcss.__wab_text,
+              sty.text__vygwa,
+              {
+                [sty.texttavern__vygwa6EOuz]: hasVariant(
+                  $state,
+                  "tavern",
+                  "tavern"
+                )
+              }
+            )}
+          >
+            {hasVariant($state, "tavern", "tavern")
+              ? "Fill My Tavern!"
+              : "Generate an NPC"}
+          </div>
 
+          {(hasVariant($state, "tavern", "tavern") ? true : true) ? (
+            <InfoIcon
+              data-plasmic-name={"overallTooltip"}
+              data-plasmic-override={overrides.overallTooltip}
+              className={classNames(projectcss.all, sty.overallTooltip, {
+                [sty.overallTooltiptavern]: hasVariant(
+                  $state,
+                  "tavern",
+                  "tavern"
+                )
+              })}
+              role={"img"}
+            />
+          ) : null}
+        </p.Stack>
+      ) : null}
       {(hasVariant($state, "tavern", "tavern") ? true : true) ? (
         <p.Stack
           as={"div"}
@@ -207,19 +240,20 @@ function PlasmicGenerateSelector__RenderFunc(props: {
             size={"large" as const}
             virtual={true}
           >
-            <Select__Option
-              className={classNames("__wab_instance", sty.option__fFbb)}
-              value={"option" as const}
+            <Option
+              className={classNames("__wab_instance", sty.antdOption__fubjT)}
+              value={"Option" as const}
             >
-              {"Option 1"}
-            </Select__Option>
-
-            <Select__Option
-              className={classNames("__wab_instance", sty.option__tyg2X)}
-              value={"option" as const}
-            >
-              {"Option 2"}
-            </Select__Option>
+              <div
+                className={classNames(
+                  projectcss.all,
+                  projectcss.__wab_text,
+                  sty.text__t1THp
+                )}
+              >
+                {"Option"}
+              </div>
+            </Option>
           </Select>
         </p.Stack>
       ) : null}
@@ -261,19 +295,20 @@ function PlasmicGenerateSelector__RenderFunc(props: {
               </div>
             }
           >
-            <Select__Option
-              className={classNames("__wab_instance", sty.option__az7YF)}
-              value={"option" as const}
+            <Option
+              className={classNames("__wab_instance", sty.antdOption__gjAd1)}
+              value={"Option" as const}
             >
-              {"Option 1"}
-            </Select__Option>
-
-            <Select__Option
-              className={classNames("__wab_instance", sty.option__iGchz)}
-              value={"option" as const}
-            >
-              {"Option 2"}
-            </Select__Option>
+              <div
+                className={classNames(
+                  projectcss.all,
+                  projectcss.__wab_text,
+                  sty.text__jRgv7
+                )}
+              >
+                {"Option"}
+              </div>
+            </Option>
           </Select>
         </p.Stack>
       ) : null}
@@ -315,19 +350,20 @@ function PlasmicGenerateSelector__RenderFunc(props: {
               </div>
             }
           >
-            <Select__Option
-              className={classNames("__wab_instance", sty.option___7ZooW)}
-              value={"option" as const}
+            <Option
+              className={classNames("__wab_instance", sty.antdOption__ngjw4)}
+              value={"Option" as const}
             >
-              {"Option 1"}
-            </Select__Option>
-
-            <Select__Option
-              className={classNames("__wab_instance", sty.option__oWIf)}
-              value={"option" as const}
-            >
-              {"Option 2"}
-            </Select__Option>
+              <div
+                className={classNames(
+                  projectcss.all,
+                  projectcss.__wab_text,
+                  sty.text__n0Yfm
+                )}
+              >
+                {"Option"}
+              </div>
+            </Option>
           </Select>
         </p.Stack>
       ) : null}
@@ -378,19 +414,20 @@ function PlasmicGenerateSelector__RenderFunc(props: {
               </div>
             }
           >
-            <Select__Option
-              className={classNames("__wab_instance", sty.option__vp4OB)}
-              value={"option" as const}
+            <Option
+              className={classNames("__wab_instance", sty.antdOption__mhIkp)}
+              value={"Option" as const}
             >
-              {"Option 1"}
-            </Select__Option>
-
-            <Select__Option
-              className={classNames("__wab_instance", sty.option__frVkb)}
-              value={"option" as const}
-            >
-              {"Option 2"}
-            </Select__Option>
+              <div
+                className={classNames(
+                  projectcss.all,
+                  projectcss.__wab_text,
+                  sty.text__he4Vw
+                )}
+              >
+                {"Option"}
+              </div>
+            </Option>
           </Select>
         </p.Stack>
       ) : null}
@@ -432,19 +469,20 @@ function PlasmicGenerateSelector__RenderFunc(props: {
               </div>
             }
           >
-            <Select__Option
-              className={classNames("__wab_instance", sty.option___0B849)}
-              value={"option" as const}
+            <Option
+              className={classNames("__wab_instance", sty.antdOption__rZo)}
+              value={"Option" as const}
             >
-              {"Option 1"}
-            </Select__Option>
-
-            <Select__Option
-              className={classNames("__wab_instance", sty.option__xdBSr)}
-              value={"option" as const}
-            >
-              {"Option 2"}
-            </Select__Option>
+              <div
+                className={classNames(
+                  projectcss.all,
+                  projectcss.__wab_text,
+                  sty.text__funrt
+                )}
+              >
+                {"Option"}
+              </div>
+            </Option>
           </Select>
         </p.Stack>
       ) : null}
@@ -605,19 +643,20 @@ function PlasmicGenerateSelector__RenderFunc(props: {
               </div>
             }
           >
-            <Select__Option
-              className={classNames("__wab_instance", sty.option__b4R9)}
-              value={"option" as const}
+            <Option
+              className={classNames("__wab_instance", sty.antdOption__iAY)}
+              value={"Option" as const}
             >
-              {"Option 1"}
-            </Select__Option>
-
-            <Select__Option
-              className={classNames("__wab_instance", sty.option__st7Hr)}
-              value={"option" as const}
-            >
-              {"Option 2"}
-            </Select__Option>
+              <div
+                className={classNames(
+                  projectcss.all,
+                  projectcss.__wab_text,
+                  sty.text__tgBp
+                )}
+              >
+                {"Option"}
+              </div>
+            </Option>
           </Select>
         </p.Stack>
       ) : null}
@@ -758,19 +797,20 @@ function PlasmicGenerateSelector__RenderFunc(props: {
               </div>
             }
           >
-            <Select__Option
-              className={classNames("__wab_instance", sty.option___9XFZi)}
-              value={"option" as const}
+            <Option
+              className={classNames("__wab_instance", sty.antdOption__pZnDk)}
+              value={"Option" as const}
             >
-              {"Option 1"}
-            </Select__Option>
-
-            <Select__Option
-              className={classNames("__wab_instance", sty.option__aM6H)}
-              value={"option" as const}
-            >
-              {"Option 2"}
-            </Select__Option>
+              <div
+                className={classNames(
+                  projectcss.all,
+                  projectcss.__wab_text,
+                  sty.text__u3GQo
+                )}
+              >
+                {"Option"}
+              </div>
+            </Option>
           </Select>
         </p.Stack>
       ) : null}
@@ -824,19 +864,20 @@ function PlasmicGenerateSelector__RenderFunc(props: {
               </div>
             }
           >
-            <Select__Option
-              className={classNames("__wab_instance", sty.option__nSbNa)}
-              value={"option" as const}
+            <Option
+              className={classNames("__wab_instance", sty.antdOption__hshb1)}
+              value={"Option" as const}
             >
-              {"Option 1"}
-            </Select__Option>
-
-            <Select__Option
-              className={classNames("__wab_instance", sty.option___37Tow)}
-              value={"option" as const}
-            >
-              {"Option 2"}
-            </Select__Option>
+              <div
+                className={classNames(
+                  projectcss.all,
+                  projectcss.__wab_text,
+                  sty.text__zWAdn
+                )}
+              >
+                {"Option"}
+              </div>
+            </Option>
           </Select>
         </p.Stack>
       ) : null}
@@ -961,6 +1002,7 @@ function PlasmicGenerateSelector__RenderFunc(props: {
 const PlasmicDescendants = {
   root: [
     "root",
+    "overallTooltip",
     "genderSelect",
     "raceSelect",
     "alignmentSelect",
@@ -981,6 +1023,7 @@ const PlasmicDescendants = {
     "generate",
     "swapView"
   ],
+  overallTooltip: ["overallTooltip"],
   genderSelect: ["genderSelect"],
   raceSelect: ["raceSelect"],
   alignmentSelect: ["alignmentSelect"],
@@ -1006,6 +1049,7 @@ type DescendantsType<T extends NodeNameType> =
   (typeof PlasmicDescendants)[T][number];
 type NodeDefaultElementType = {
   root: "div";
+  overallTooltip: "svg";
   genderSelect: typeof Select;
   raceSelect: typeof Select;
   alignmentSelect: typeof Select;
@@ -1088,6 +1132,7 @@ export const PlasmicGenerateSelector = Object.assign(
   makeNodeComponent("root"),
   {
     // Helper components rendering sub-elements
+    overallTooltip: makeNodeComponent("overallTooltip"),
     genderSelect: makeNodeComponent("genderSelect"),
     raceSelect: makeNodeComponent("raceSelect"),
     alignmentSelect: makeNodeComponent("alignmentSelect"),
