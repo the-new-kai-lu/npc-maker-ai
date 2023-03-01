@@ -34,7 +34,7 @@ function Signup_(props: SignupProps, ref: HTMLElementRefOf<"div">) {
                           }
                         }}
                         toOpenAi={{
-                          wrap: (content) => <a href={"https://beta.openai.com/signup"} target={"_blank"}>{content}</a>
+                          wrap: (content) => <a href={"https://beta.openai.com/signup"} target={"_blank"} rel="noreferrer">{content}</a>
                         }}
                         {...rest} />;
 }

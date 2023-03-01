@@ -1,5 +1,11 @@
 import arrayShuffle from "array-shuffle";
 
+export enum STAT_METHOD {
+    FOUR_DROP_LOW,
+    NPC_ARRAY,
+    HEROIC_ARRAY,
+}
+
 export class StatGenerator {
 
     private static fourDropLow() {
@@ -188,10 +194,4 @@ export class StatGenerator {
         }
         return val
     }
-}
-
-export enum STAT_METHOD {
-    FOUR_DROP_LOW,
-    NPC_ARRAY,
-    HEROIC_ARRAY,
 }
