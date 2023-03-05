@@ -3,7 +3,6 @@ import {useEffect, useRef, useState} from "react";
 import {DefaultHomepageProps, PlasmicHomepage} from "./plasmic/d_d_npc_generator/PlasmicHomepage";
 import {HTMLElementRefOf} from "@plasmicapp/react-web";
 import {NPC} from "../models/npc";
-import {build_single_npc} from "../services/build_npc";
 import {formatInput, formatMultipleInput, GenerateData} from "../services/format_data";
 import {toast, ToastContainer} from "react-toastify";
 import {motion} from "framer-motion";
@@ -59,20 +58,23 @@ function Homepage_(props: HomepageProps, ref: HTMLElementRefOf<"div">) {
         toast.update(toastId.current, {render: 'All done!', autoClose: 5000, hideProgressBar: false})
         toastId.current = null
       } else {
-        build_single_npc(dataStart[counter], props.k).then(result => {
-          if (counter === 0) {
-            setLoading(false)
-            setNpcArray([result])
-            toastId.current = toast(`Now generating: NPC ${counter+2}/${dataStart.length}`)
-          } else {
-            //@ts-ignore
-            setNpcArray([...npcArray, result])
-            toast.update(toastId.current, {render: `Now generating: NPC ${counter+2}/${dataStart.length}`, className: 'rotateY animated'})
-          }
-          setCounter(counter+1)
-        })
+        import('../services/build_npc').then(({ build_single_npc }) =>
+          build_single_npc(dataStart[counter], props.k).then(result => {
+            if (counter === 0) {
+              setLoading(false)
+              setNpcArray([result])
+              toastId.current = toast(`Now generating: NPC ${counter+2}/${dataStart.length}`)
+            } else {
+              //@ts-ignore
+              setNpcArray([...npcArray, result])
+              toast.update(toastId.current, {render: `Now generating: NPC ${counter+2}/${dataStart.length}`, className: 'rotateY animated'})
+            }
+            setCounter(counter+1)
+          })
+        )
       }
     }
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [counter])
 
   function setPrevNpc(): void {
@@ -113,7 +115,7 @@ function Homepage_(props: HomepageProps, ref: HTMLElementRefOf<"div">) {
       pauseOnHover={false}
       theme="light"
     />
-    {loading && <div style={{width: '100%', height: '100%', zIndex: 5, backgroundColor: "#cfcfcf", opacity: 0.15, position: "absolute"}}><img src='tetris-game.gif' style={{left: '50%', bottom: '50%', right: '50%'}}/></div>}
+    {loading && <div style={{width: '100%', height: '100%', zIndex: 5, backgroundColor: "#cfcfcf", opacity: 0.15, position: "absolute"}}><img src='tetris-game.gif' style={{left: '50%', bottom: '50%', right: '50%'}} alt=''/></div>}
       <PlasmicHomepage
       root={{ ref,  }}
       left={{
@@ -156,7 +158,7 @@ function Homepage_(props: HomepageProps, ref: HTMLElementRefOf<"div">) {
               setNpc(undefined)
               setNpcArray(undefined)
               setLoading(true)
-              build_single_npc(formatInput(data.input), props.k).then(npc => {setNpc(npc);setLoading(false)})
+              import('../services/build_npc').then(({ build_single_npc }) => build_single_npc(formatInput(data.input), props.k)).then(npc => {setNpc(npc);setLoading(false)})
             }
           }
         }

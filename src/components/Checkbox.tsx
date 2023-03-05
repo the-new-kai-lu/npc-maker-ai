@@ -9,7 +9,7 @@ interface CheckboxProps extends DefaultCheckboxProps {
   // Feel free to add any additional props that this component should receive
 }
 function Checkbox_(props: CheckboxProps, ref: CheckboxRef) {
-  const { plasmicProps, state } = PlasmicCheckbox.useBehavior<CheckboxProps>(
+  const { plasmicProps } = PlasmicCheckbox.useBehavior<CheckboxProps>(
     props,
     ref
   );
