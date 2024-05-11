@@ -106,7 +106,7 @@ export class DescriptionWriter {
             `\nDescribe ${this.npc.gender?"his":"her"} most important physical features.`
         ]
         const response = await this.api.createCompletion({
-            model: 'text-davinci-003',
+            model: 'gpt-4',
             prompt: this.initial_prompt + promptFinishers[Math.floor(Math.random() * promptFinishers.length)],
             temperature: 0.7,
             top_p: 0.5,
@@ -123,7 +123,7 @@ export class DescriptionWriter {
             `\nWhat is ${this.npc.gender?"his":"her"} personality like?`
         ]
         const response = await this.api.createCompletion({
-            model: 'text-davinci-003',
+            model: 'gpt-4',
             prompt: this.initial_prompt + '\n' + this.npc.physical_description + promptFinishers[Math.floor(Math.random() * promptFinishers.length)],
             temperature: 0.7,
             top_p: 0.5,
@@ -141,7 +141,7 @@ export class DescriptionWriter {
             `\nWhat's ${this.npc.gender?"his":"her"} story so far?`
         ]
         const response = await this.api.createCompletion({
-            model: 'text-davinci-003',
+            model: 'gpt-4',
             prompt: this.initial_prompt + '\n' + this.npc.physical_description + '\n' + this.npc.personality_description + promptFinishers[Math.floor(Math.random() * promptFinishers.length)],
             temperature: 0.7,
             top_p: 0.5,
@@ -158,7 +158,7 @@ export class DescriptionWriter {
             `\nA group of adventurers meets ${this.npc.first_name}. What does ${this.npc.gender?"he":"she"} ask them to do?`
         ]
         const response = await this.api.createCompletion({
-            model: 'text-davinci-003',
+            model: 'gpt-4',
             prompt: this.initial_prompt + '\n' + this.npc.physical_description + '\n' + this.npc.personality_description + '\n' + this.npc.history + promptFinishers[Math.floor(Math.random() * promptFinishers.length)],
             temperature: 0.7,
             top_p: 0.5,
