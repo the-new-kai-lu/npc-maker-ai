@@ -1,17 +1,20 @@
 import {ALIGNMENT, NPC} from "../models/npc";
-import {Configuration, OpenAIApi} from "openai";
+import OpenAI from "openai";
 import {WeightHeightGenerator} from "./weight_height_age_generator";
 import {StatGenerator} from "./stat_generator";
+import {ChatCompletionMessageParam, ChatCompletionUserMessageParam} from "openai/resources";
 
 export class DescriptionWriter {
     npc: NPC
-    api: OpenAIApi
+    api: OpenAI
     initial_prompt: string
+    messages: ChatCompletionMessageParam[]
 
     constructor(key: string, npc: NPC) {
         this.npc = npc
-        this.api = new OpenAIApi(new Configuration({apiKey: key}))
+        this.api = new OpenAI({apiKey: key, dangerouslyAllowBrowser: true})
         this.initial_prompt = this.generateInitialPrompt()
+        this.messages = [{role: "system", content: "You are an assistant for a high fantasy writer, whose job is to help the writer populate the world with interesting characters."}]
     }
 
     private capitalize(s: string) {
@@ -105,14 +108,17 @@ export class DescriptionWriter {
             `\nWhat does ${this.npc.gender?"he":"she"} look like?`,
             `\nDescribe ${this.npc.gender?"his":"her"} most important physical features.`
         ]
-        const response = await this.api.createCompletion({
-            model: 'gpt-4',
-            prompt: this.initial_prompt + promptFinishers[Math.floor(Math.random() * promptFinishers.length)],
+        const nextMsg: ChatCompletionUserMessageParam = {role: "user", "content": this.initial_prompt + promptFinishers[Math.floor(Math.random() * promptFinishers.length)]}
+        this.messages.push(nextMsg)
+        const response = await this.api.chat.completions.create({
+            model: 'gpt-3.5-turbo',
+            messages: this.messages,
             temperature: 0.7,
             top_p: 0.5,
             max_tokens: 256
         })
-        this.npc.physical_description = (response.data.choices[0].text??"").trim()
+        this.npc.physical_description = (response.choices[0].message.content??"").trim()
+        this.messages.push({role: "assistant", content:this.npc.physical_description})
     }
 
     async getPersonality() {
@@ -122,14 +128,17 @@ export class DescriptionWriter {
             `\nDescribe ${this.npc.first_name}'s personality traits.`,
             `\nWhat is ${this.npc.gender?"his":"her"} personality like?`
         ]
-        const response = await this.api.createCompletion({
-            model: 'gpt-4',
-            prompt: this.initial_prompt + '\n' + this.npc.physical_description + promptFinishers[Math.floor(Math.random() * promptFinishers.length)],
+        const nextMsg: ChatCompletionUserMessageParam = {role: "user", content: promptFinishers[Math.floor(Math.random() * promptFinishers.length)]}
+        this.messages.push(nextMsg)
+        const response = await this.api.chat.completions.create({
+            model: 'gpt-3.5-turbo',
+            messages: this.messages,
             temperature: 0.7,
             top_p: 0.5,
             max_tokens: 256
         })
-        this.npc.personality_description = (response.data.choices[0].text??"").trim()
+        this.npc.personality_description = (response.choices[0].message.content??"").trim()
+        this.messages.push({role: "assistant", content:this.npc.personality_description})
     }
 
     async getHistory() {
@@ -140,14 +149,17 @@ export class DescriptionWriter {
             `\nTell me about ${this.npc.gender?"his":"her"} life.`,
             `\nWhat's ${this.npc.gender?"his":"her"} story so far?`
         ]
-        const response = await this.api.createCompletion({
-            model: 'gpt-4',
-            prompt: this.initial_prompt + '\n' + this.npc.physical_description + '\n' + this.npc.personality_description + promptFinishers[Math.floor(Math.random() * promptFinishers.length)],
+        const nextMsg: ChatCompletionUserMessageParam = {role: "user", content: promptFinishers[Math.floor(Math.random() * promptFinishers.length)]}
+        this.messages.push(nextMsg)
+        const response = await this.api.chat.completions.create({
+            model: 'gpt-3.5-turbo',
+            messages: this.messages,
             temperature: 0.7,
             top_p: 0.5,
             max_tokens: 256
         })
-        this.npc.history = (response.data.choices[0].text??"").trim()
+        this.npc.history = (response.choices[0].message.content??"").trim()
+        this.messages.push({role: "assistant", content:this.npc.history})
     }
 
     async getPlotHook() {
@@ -157,30 +169,25 @@ export class DescriptionWriter {
             `\nA group of adventurers meets ${this.npc.first_name}. What quest does ${this.npc.gender?"he":"she"} give them?`,
             `\nA group of adventurers meets ${this.npc.first_name}. What does ${this.npc.gender?"he":"she"} ask them to do?`
         ]
-        const response = await this.api.createCompletion({
-            model: 'gpt-4',
-            prompt: this.initial_prompt + '\n' + this.npc.physical_description + '\n' + this.npc.personality_description + '\n' + this.npc.history + promptFinishers[Math.floor(Math.random() * promptFinishers.length)],
+        const nextMsg: ChatCompletionUserMessageParam = {role: "user", content: promptFinishers[Math.floor(Math.random() * promptFinishers.length)]}
+        this.messages.push(nextMsg)
+        const response = await this.api.chat.completions.create({
+            model: 'gpt-3.5-turbo',
+            messages: this.messages,
             temperature: 0.7,
             top_p: 0.5,
             max_tokens: 128
         })
-        this.npc.plot_hook = (response.data.choices[0].text??"").trim()
+        this.npc.plot_hook = (response.choices[0].message.content??"").trim()
     }
 
     async getPortrait() {
-        const response = await this.api.createImage({
+        const response = await this.api.images.generate({
             prompt: `A portrait of a ${this.npc.gender?"male":"female"} ${this.npc.race.toLowerCase()} ${this.npc.class.toLowerCase()} in a fantasy game, in a digital art style`,
             n: 1,
-            size: '512x512'
+            size: "512x512",
+            model: 'dall-e-2'
         })
-        if (response.data != null) {
-            if (response.data.data != null) {
-                if (response.data.data[0] != null) {
-                    if (response.data.data[0].url != null) {
-                        this.npc.portrait = response.data.data[0].url
-                    }
-                }
-            }
-        }
+        this.npc.portrait = response.data[0].url
     }
 }
